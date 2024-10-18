@@ -1,101 +1,236 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useState } from "react";
+import './form.css';
+
+const FormPage = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [contact, setContact] = useState("");
+  const [gender, setGender] = useState("male");
+  const [subjects, setSubjects] = useState({
+      english: true,
+      maths: false,
+      physics: false,
+  });
+  const [resume, setResume] = useState(null);
+  const [url, setUrl] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
+  const [about, setAbout] = useState("");
+
+  const handleSubmit = (e) => {
+      e.preventDefault();
+      console.log(
+          firstName,
+          lastName,
+          email,
+          contact,
+          gender,
+          selectedOption,
+          subjects,
+          resume,
+          url,
+          about
+      );
+      // Add form submission logic here
+  };
+
+  const handleSubjectChange = (sub) => {
+      setSubjects((prev) => ({
+          ...prev,
+          [sub]: !prev[sub],
+      }));
+  };
+
+  const handleReset = () => {
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setContact("");
+      setGender("male");
+      setSubjects({
+          english: true,
+          maths: false,
+          physics: false,
+      });
+      setResume(null);
+      setUrl("");
+      setSelectedOption("");
+      setAbout("");
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="App">
+      <h1>Form in React</h1>
+      <fieldset>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="firstname">First Name*</label>
+          <input
+            type="text"
+            name="firstname"
+            id="firstname"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            placeholder="Enter First Name"
+            required
+          />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          <label htmlFor="lastname">Last Name*</label>
+          <input
+            type="text"
+            name="lastname"
+            id="lastname"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            placeholder="Enter Last Name"
+            required
+          />
+
+          <label htmlFor="email">Email*</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter Email"
+            required
+          />
+
+          <label htmlFor="contact">Contact*</label>
+          <input
+            type="tel"
+            name="contact"
+            id="contact"
+            value={contact}
+            onChange={(e) => setContact(e.target.value)}
+            placeholder="Enter Contact Number"
+            required
+          />
+
+          <label htmlFor="gender">Gender*</label>
+          <input
+            type="radio"
+            name="gender"
+            value="male"
+            id="male"
+            checked={gender === "male"}
+            onChange={(e) => setGender(e.target.value)}
+          />
+          Male
+          <input
+            type="radio"
+            name="gender"
+            value="female"
+            id="female"
+            checked={gender === "female"}
+            onChange={(e) => setGender(e.target.value)}
+          />
+          Female
+          <input
+            type="radio"
+            name="gender"
+            value="other"
+            id="other"
+            checked={gender === "other"}
+            onChange={(e) => setGender(e.target.value)}
+          />
+          Other
+
+          <label>Your best Subject</label>
+          <input
+            type="checkbox"
+            name="subject"
+            id="english"
+            checked={subjects.english}
+            onChange={() => handleSubjectChange("english")}
+          />
+          English
+          <input
+            type="checkbox"
+            name="subject"
+            id="maths"
+            checked={subjects.maths}
+            onChange={() => handleSubjectChange("maths")}
+          />
+          Maths
+          <input
+            type="checkbox"
+            name="subject"
+            id="physics"
+            checked={subjects.physics}
+            onChange={() => handleSubjectChange("physics")}
+          />
+          Physics
+
+          <label htmlFor="resume">Upload Resume*</label>
+          <input
+            type="file"
+            name="resume"
+            id="resume"
+            onChange={(e) => setResume(e.target.files[0])}
+            required
+          />
+
+          <label htmlFor="url">Portfolio URL*</label>
+          <input
+            type="url"
+            name="url"
+            id="url"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            placeholder="Enter your portfolio URL"
+            required
+          />
+
+          <label>Select Your Level</label>
+          <select
+            name="level"
+            id="level"
+            value={selectedOption}
+            onChange={(e) => setSelectedOption(e.target.value)}
+            required
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+            <option value="" disabled>
+              Select your level
+            </option>
+            <optgroup label="Beginners">
+              <option value="1">HTML</option>
+              <option value="2">CSS</option>
+              <option value="3">JavaScript</option>
+            </optgroup>
+            <optgroup label="Advanced">
+              <option value="4">React</option>
+              <option value="5">Node</option>
+              <option value="6">Express</option>
+              <option value="7">MongoDB</option>
+            </optgroup>
+          </select>
+
+          <label htmlFor="about">About You*</label>
+          <textarea
+            name="about"
+            id="about"
+            cols="30"
+            rows="5"
+            value={about}
+            onChange={(e) => setAbout(e.target.value)}
+            placeholder="Tell us about yourself"
+            required
+          ></textarea>
+
+          <button type="reset" onClick={handleReset}>
+            Reset
+          </button>
+
+          <button type="submit">
+            Submit
+          </button>
+        </form>
+      </fieldset>
     </div>
   );
-}
+};
+
+export default FormPage;
