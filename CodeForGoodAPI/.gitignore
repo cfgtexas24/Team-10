@@ -9,6 +9,7 @@
 # Editor-based HTTP Client requests
 /httpRequests/
 # Datasource local storage ignored files
+/appsettings.Development.json
 /dataSources/
 /dataSources.local.xml
 /.idea
