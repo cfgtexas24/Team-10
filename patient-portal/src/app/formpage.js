@@ -1,72 +1,8 @@
-"use client";
-
-import Image from "next/image";
-import Link from "next/link";
-import '..'
-import { useState } from "react";
+// Filename - formpage.js
+import "./form.css"; // Ensure the CSS is properly imported
+import { React, useState } from "react";
 
 const FormPage = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [contact, setContact] = useState("");
-  const [gender, setGender] = useState("male");
-  const [subjects, setSubjects] = useState({
-      english: true,
-      maths: false,
-      physics: false,
-  });
-  const [resume, setResume] = useState("");
-  const [url, setUrl] = useState("");
-  const [selectedOption, setSelectedOption] = useState("");
-  const [about, setAbout] = useState("");
-
-  const handleSubmit = (e) => {
-      e.preventDefault();
-      console.log(
-          firstName,
-          lastName,
-          email,
-          contact,
-          gender,
-          selectedOption,
-          subjects,
-          resume,
-          url,
-          about
-      );
-      // Add your form submission logic here
-  };
-
-  const handleSubjectChange = (sub) => {
-      setSubjects((prev) => ({
-          ...prev,
-          [sub]: !prev[sub],
-      }));
-  };
-
-  const handleReset = () => {
-      // Reset all state variables here
-      setFirstName("");
-      setLastName("");
-      setEmail("");
-      setContact("");
-      setGender("male");
-      setSubjects({
-          english: true,
-          maths: false,
-          physics: false,
-      });
-      setResume("");
-      setUrl("");
-      setSelectedOption("");
-      setAbout("");
-  };
-
-  "use client";
-
-
-  const FormPage = () => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
@@ -252,6 +188,7 @@ const FormPage = () => {
                         <option
                             value=""
                             disabled
+                            selected={selectedOption === ""}
                         >
                             Select your Ans
                         </option>
@@ -301,9 +238,6 @@ const FormPage = () => {
             </fieldset>
         </div>
     );
-  };
-
-
 };
 
 export default FormPage;
