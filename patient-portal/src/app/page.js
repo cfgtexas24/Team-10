@@ -1,3 +1,15 @@
+"use client";
+import { useState } from "react";
+import Profile from "../components/dashboard/Profile";
+import Story from "../components/dashboard/Story";
+import FAQ from "../components/dashboard/FAQ";
+import Resources from "../components/dashboard/Resources";
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from "../components/ui/Tabs";
 'use client';
 import { useState } from 'react';
 import Profile from '../components/dashboard/Profile';

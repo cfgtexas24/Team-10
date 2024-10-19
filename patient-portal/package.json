@@ -9,12 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@babel/core": "^7.25.8",
+    "@babel/preset-env": "^7.25.8",
+    "@babel/preset-react": "^7.25.7",
+    "babel": "^6.23.0",
     "next": "14.2.15",
     "patient-portal": "file:",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@babel/core": "^7.25.8",
     "eslint": "^8",
     "eslint-config-next": "14.2.15",
     "postcss": "^8",
