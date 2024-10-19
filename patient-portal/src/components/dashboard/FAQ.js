@@ -32,7 +32,7 @@ export default function FAQ() {
             value={newQuestion}
             onChange={(e) => setNewQuestion(e.target.value)}
             placeholder="Type your question here..."
-            className="border p-2 w-full mb-2"
+            className="border p-2 w-full mb-2 bg-white text-black" // Updated classes for background and text color
           />
           <button type="submit" className="bg-blue-500 text-white p-2 rounded">Submit Question</button>
         </form>
