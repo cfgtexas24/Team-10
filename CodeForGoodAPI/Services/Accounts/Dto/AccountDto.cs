@@ -7,6 +7,7 @@ public class AccountDto
     public int Id { get; set; }
     public string Username { get; set; }
     public string Password { get; set; }
+    public string? AccountType { get; set; }
 
     public Account ConvertToEntity()
     {
@@ -14,7 +15,8 @@ public class AccountDto
         {
             Id = Id,
             Username = Username,
-            Password = Password
+            Password = Password,
+            AccountType = AccountType,
         };
     }
 }
