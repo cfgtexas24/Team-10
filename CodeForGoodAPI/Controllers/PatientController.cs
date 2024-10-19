@@ -8,11 +8,11 @@ namespace CodeForGoodAPI.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class PatientsController
+public class PatientController
 {
     private readonly IPatientService _patientService;
 
-    public PatientsController(IPatientService patientService)
+    public PatientController(IPatientService patientService)
     {
         _patientService = patientService;
     }

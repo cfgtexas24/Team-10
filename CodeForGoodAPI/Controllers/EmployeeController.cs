@@ -8,11 +8,11 @@ namespace CodeForGoodAPI.Controllers
 
     [ApiController]
     [Route("[controller]")]
-    public class EmployeesController
+    public class EmployeeController
     {
         private readonly IEmployeeService _employeeService;
 
-        public EmployeesController(IEmployeeService employeeService)
+        public EmployeeController(IEmployeeService employeeService)
         {
             _employeeService = employeeService;
         }

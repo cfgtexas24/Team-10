@@ -10,7 +10,7 @@ public class PatientDto
     public string EmailAddress { get; set; }
     public DateTime DateOfBirth { get; set; }
     public string Gender { get; set; }
-    public string UserType { get; set; }
+    public string Occupation { get; set; }
 
     public Patient ConvertToEntity()
     {
@@ -22,7 +22,7 @@ public class PatientDto
             EmailAddress = EmailAddress,
             DateOfBirth = DateOfBirth,
             Gender = Gender,
-            UserType = UserType
+            Occupation = Occupation
         };
     }
 }
