@@ -72,7 +72,7 @@ export default function FeedbackForm() {
           </div>
           <Button
             type="submit"
-            className="w-full py-3 bg-[#A26B61] text-white font-bold rounded-lg shadow-md hover:bg-[#6C5846] transition-all duration-300"
+            className="w-full py-3 bg-[#A26B61] hover:bg-[#e8a397] text-white font-bold rounded-lg shadow-md transition-all duration-300"
           >
             Submit Feedback
           </Button>
