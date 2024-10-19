@@ -3,7 +3,7 @@ import { Input } from '../ui/Input';
 import { Label } from '../ui/Label';
 import { Button } from '../ui/Button';
 import { Avatar } from '../ui/Avatar';
-
+import { useState } from 'react';
 
 export default function Profile() {
   const [name, setName] = useState('John Doe');
