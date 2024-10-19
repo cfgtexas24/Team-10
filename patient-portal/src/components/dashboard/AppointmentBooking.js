@@ -5,10 +5,41 @@ const AppointmentForm = () => {
   const [appointmentTime, setAppointmentTime] = useState('');
   const [appointmentReason, setAppointmentReason] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`Appointment booked for ${appointmentDate} at ${appointmentTime} for ${appointmentReason}`);
-    // Add logic to send the form data to your backend or API
+
+    const appointmentData = {
+      appointmentDate,
+      appointmentTime,
+      appointmentReason,
+    };
+
+    console.log('Appointment Data:', appointmentData);
+
+    try {
+      const response = await fetch('http://ec2-3-83-143-244.compute-1.amazonaws.com:5000/Account/Login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(appointmentData),
+      });
+
+      await response.json();
+
+      if (response.ok) {
+        alert('Appointment successfully booked');
+        // Optionally clear the form
+        setAppointmentDate('');
+        setAppointmentTime('');
+        setAppointmentReason('');
+      } else {
+        alert('Failed to book appointment');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred while booking the appointment');
+    }
   };
 
   return (

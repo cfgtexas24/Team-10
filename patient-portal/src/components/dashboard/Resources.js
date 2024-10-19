@@ -43,13 +43,13 @@ export default function Resources() {
       title: "Your First Prenatal Doctor's Visit",
       description: "Regular appointments with your health care provider throughout your pregnancy are important to ensure the health of you and your baby. In addition to medical care, prenatal care includes education on pregnancy and childbirth, plus counseling and support",
       imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScldcKuZ_YmoTfCeY6VkCTosUD8kfdGE1pRA&s",
-      learnMoreUrl: "https://www.webmd.com/women/first-doctor-visit"
+      learnMoreUrl: "https://www.healthpartners.com/blog/first-prenatal-appointment/#:~:text=What's%20usually%20done%20at%20the,the%20rest%20of%20your%20pregnancy."
     },
     {
       title: "Choosing the Right Midwife for Your Pregnancy",
       description: "Learn how to select a midwife who aligns with your birth plan and personal preferences for a supportive pregnancy journey",
       imageUrl: "https://static01.nyt.com/images/2020/04/24/multimedia/24parenting-DIYPregnancy/24parenting-DIYPregnancy-superJumbo.jpg",
-      learnMoreUrl: "#nccpa-research"
+      learnMoreUrl: "https://my.clevelandclinic.org/health/articles/22648-midwife"
     },
     {
       id: 1,
