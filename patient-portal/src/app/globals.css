@@ -3,30 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --primary-color: #A26B61; /* You can customize this */
-  --secondary-color: #3A696E;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #f0f4f8;
+  --foreground: #333;
+  --primary-color: #2c7a4e;
+  --secondary-color: #4a5568;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-
-#1 {
-  border: 3px solid white;
-}
-
-
 
 @layer utilities {
   .text-balance {
@@ -34,45 +21,54 @@ body {
   }
 
   .btn-primary {
-    @apply bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700 transition ease-in-out duration-300 px-5 py-2;
+    @apply bg-green-600 text-white rounded px-4 py-2 hover:bg-green-700 transition ease-in-out duration-300;
   }
 
   .card {
-    @apply bg-white dark:bg-gray-800 p-10 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out text-xl; ;
-    /* Added more padding and rounded-xl for smoother corners */
+    @apply bg-white p-6 rounded-lg shadow-md;
   }
 
   .input {
-    @apply w-full p-3 rounded-lg border dark:border-gray-600 bg-gray-100 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500;
-    /* Increased rounded to rounded-lg */
+    @apply w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500;
   }
 
   .label {
-    @apply font-semibold text-gray-700 dark:text-gray-300 mb-2 block;
-    /* Added margin-bottom for spacing */
+    @apply font-medium text-gray-700 mb-1 block;
   }
 
   .tabs-list {
-    @apply grid grid-cols-4 gap-4 mb-4 bg-gray-200 dark:bg-gray-900 rounded-lg p-3;
-    /* Added gap and padding for better spacing, rounded-lg for smoother corners */
+    @apply flex space-x-4 mb-4 bg-white border-b border-gray-200;
   }
 
   .tabs-trigger {
-    @apply text-center p-3 rounded-lg font-semibold hover:bg-blue-500 hover:text-white transition-colors duration-200 ease-in-out;
-    /* Increased padding and added rounded-lg for better look */
+    @apply px-4 py-2 text-gray-600 hover:text-green-600 hover:border-b-2 hover:border-green-600 transition-colors duration-200 ease-in-out;
   }
 
   .tabs-trigger.active {
-    @apply bg-blue-500 text-white;
+    @apply text-green-600 border-b-2 border-green-600;
   }
 
-  .accordion-trigger {
-    @apply flex items-center justify-between p-4 rounded-lg hover:bg-blue-500 hover:text-white transition-colors duration-200 ease-in-out;
-    /* Added more padding and increased rounded to rounded-lg */
+  .header {
+    @apply bg-green-700 text-white p-4;
   }
 
-  .accordion-content {
-    @apply p-6 bg-gray-100 dark:bg-gray-700 rounded-lg mt-3;
-    /* More padding and rounded-lg for consistency */
+  .header-nav {
+    @apply flex items-center space-x-4;
+  }
+
+  .header-nav-item {
+    @apply text-white hover:text-green-200;
+  }
+
+  .form-step {
+    @apply text-lg font-semibold mb-4;
+  }
+
+  .form-step-active {
+    @apply text-green-600;
+  }
+
+  .form-grid {
+    @apply grid grid-cols-2 gap-4;
   }
 }

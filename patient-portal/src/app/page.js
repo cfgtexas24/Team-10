@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation';
 import { MantineProvider } from '@mantine/core';
 
 export default function Component() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
+  const [isLoggedIn, setIsLoggedIn] = useState(true); // Track login status
   const [activeTab, setActiveTab] = useState('profile'); // Track which tab is active
   const [name, setName] = useState('John Doe');
   const [email, setEmail] = useState('john.doe@example.com');
