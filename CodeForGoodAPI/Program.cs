@@ -35,7 +35,7 @@ if (app.Environment.IsDevelopment())
 
 // sa account password: Password1!
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
