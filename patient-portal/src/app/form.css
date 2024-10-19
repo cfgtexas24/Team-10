@@ -2,9 +2,46 @@
 /* It containds the Form and Page Styling*/
 
 body {
-    background: #f3f3f3;
+    background: white;
     text-align: center;
 }
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="url"],
+input[type="file"],
+textarea,
+select {
+  color: black;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 16px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #888; /* Placeholder text color */
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  accent-color: black; /* Modern browsers support accent color */
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
 .App {
     background-color: #fff;
     border-radius: 15px;
