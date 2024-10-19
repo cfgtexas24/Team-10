@@ -449,7 +449,6 @@ const AdminDashboard = () => {
               <div className="mb-8">
               {showFeedback && (
               <div>
-                <h2>User Feedback</h2>
                 {feedbacks.length > 0 ? (
                   feedbacks.map((feedback) => (
                     <div
