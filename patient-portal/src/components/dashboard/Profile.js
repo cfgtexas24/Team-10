@@ -37,14 +37,14 @@ export default function Profile() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: {
+      body: JSON.stringify({
         firstName: profile.firstName,
         lastName: profile.lastName,
         emailAddress: profile.email,
         dateOfBirth: profile.dob,
         gender: profile.gender,
         occupation: profile.occupation
-      }
+      })
     });
 
     const response = await request.json();
