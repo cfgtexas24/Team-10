@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { FiMenu, FiArrowLeft } from "react-icons/fi"; // Importing icons from react-icons
+import { Card } from "@/components/ui/Card";
 
 const patientData = [
   { id: 1, firstName: 'Emily', lastName: 'Johnson', emailAddress: 'emily.johnson@example.com', dateOfBirth: '1990-05-14', age: 34, occupation: 'Teacher', race: 'White', ethnicity: 'Non-Hispanic', insurance: 'Yes' },
@@ -66,6 +67,24 @@ const AdminDashboard = () => {
   // State for sidebar visibility and selected tab
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedTab, setSelectedTab] = useState("By Patient");
+  const [feedbacks, setFeedbacks] = useState([]); // State to store feedbacks
+  const [showFeedback, setShowFeedback] = useState(false); // State to toggle feedback display
+
+  const fetchFeedback = async () => {
+    const response = await fetch("http://ec2-3-83-143-244.compute-1.amazonaws.com:5000/Feedback/GetAll", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    const data = await response.json();
+    setFeedbacks(data); // Set the feedback data
+  };
+
+  const handleFeedbackClick = async () => {
+    await fetchFeedback(); // Fetch feedback data when button is clicked
+    setShowFeedback(true); // Show feedback when the button is clicked
+  };
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -158,347 +177,302 @@ const AdminDashboard = () => {
     };
 
     
-  return (
-    <div className="flex h-screen">
-      {/* Collapsible Sidebar */}
-      <div
-        className={`${
-          isSidebarOpen ? "w-1/4" : "w-0"
-        } transition-width duration-300 bg-gray-100 h-full overflow-hidden`}
-      >
-        {isSidebarOpen && (
-          <div className="p-6 space-y-6">
-            <h2 className="text-xl font-semibold mb-4">Select Tab</h2>
-            <button
-              onClick={() => setSelectedTab("By Patient")}
-              className="block mb-4"
-            >
-              By Patient
-            </button>
-            {selectedTab === "By Patient" && (
-              <>
-                <div className="space-y-4">
-                  <select
+    return (
+      <div className="flex h-screen">
+        {/* Collapsible Sidebar */}
+        <div
+          className={`${
+            isSidebarOpen ? "w-1/4" : "w-0"
+          } transition-width duration-300 bg-gray-100 h-full overflow-hidden`}
+        >
+          {isSidebarOpen && (
+            <div className="p-6 space-y-6">
+              <h2 className="text-xl font-semibold mb-4">Tabs</h2>
+              <button
+                onClick={() => setSelectedTab("By Patient")}
+                className="block mb-4"
+              >
+                By Patient
+              </button>
+              {selectedTab === "By Patient" && (
+                <>
+                  <div className="space-y-4">
+                    <select
+                      name="race"
+                      value={filters.race}
+                      onChange={handleFilterChange}
+                      className="input w-full"
+                    >
+                      <option value="">Filter by Race</option>
+                      <option value="White">White</option>
+                      <option value="Black or African American">
+                        Black or African American
+                      </option>
+                      <option value="Asian">Asian</option>
+                    </select>
+                    <select
+                      name="ethnicity"
+                      value={filters.ethnicity}
+                      onChange={handleFilterChange}
+                      className="input w-full"
+                    >
+                      <option value="">Filter by Ethnicity</option>
+                      <option value="Hispanic">Hispanic</option>
+                      <option value="Non-Hispanic">Non-Hispanic</option>
+                    </select>
+                    <select
+                      name="insurance"
+                      value={filters.insurance}
+                      onChange={handleFilterChange}
+                      className="input w-full"
+                    >
+                      <option value="">Filter by Insurance</option>
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select>
+                    <input
+                      type="number"
+                      name="age"
+                      placeholder="Filter by Age"
+                      value={filters.age}
+                      onChange={handleFilterChange}
+                      className="input w-full"
+                    />
+                  </div>
+                </>
+              )}
+              <button
+                onClick={() => setSelectedTab("By Service")}
+                className="block"
+              >
+                <div className="space-y-4">By Service</div>
+              </button>
+  
+              {/* User Feedback Button */}
+              <button
+                onClick={() => {
+                  fetchFeedback();
+                  setShowFeedback(true);
+                  setSelectedTab("User Feedback");
+                }}
+                className="block mb-4"
+              >
+                User Feedback
+              </button>
+            </div>
+          )}
+        </div>
+  
+        {/* Main Content */}
+        <div className={`flex-1 p-6 transition-all duration-300`}>
+          {/* Sidebar Toggle Icon */}
+          <div
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            className="mb-4 cursor-pointer text-2xl bg-gray-200 hover:bg-gray-300 p-2 rounded-full inline-block"
+          >
+            {isSidebarOpen ? <FiArrowLeft /> : <FiMenu />}
+          </div>
+  
+          {selectedTab === "By Patient" ? (
+            <>
+              <h1 className="text-3xl font-bold mb-4">Patient Records</h1>
+              {/* Search Bar */}
+              <input
+                type="text"
+                placeholder="Search by any attribute"
+                value={searchTerm}
+                onChange={handleSearch}
+                className="input mb-4 w-full"
+              />
+  
+              {/* Patient List */}
+              <table className="table-auto w-full mb-8">
+                <thead>
+                  <tr>
+                    <th className="px-4 py-2">ID</th>
+                    <th className="px-4 py-2">First Name</th>
+                    <th className="px-4 py-2">Last Name</th>
+                    <th className="px-4 py-2">Email</th>
+                    <th className="px-4 py-2">DOB</th>
+                    <th className="px-4 py-2">Age</th>
+                    <th className="px-4 py-2">Occupation</th>
+                    <th className="px-4 py-2">Race</th>
+                    <th className="px-4 py-2">Ethnicity</th>
+                    <th className="px-4 py-2">Insurance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredData.map((patient) => (
+                    <tr key={patient.id}>
+                      <td className="border px-4 py-2">{patient.id}</td>
+                      <td className="border px-4 py-2">{patient.firstName}</td>
+                      <td className="border px-4 py-2">{patient.lastName}</td>
+                      <td className="border px-4 py-2">{patient.emailAddress}</td>
+                      <td className="border px-4 py-2">{patient.dateOfBirth}</td>
+                      <td className="border px-4 py-2">{patient.age}</td>
+                      <td className="border px-4 py-2">{patient.occupation}</td>
+                      <td className="border px-4 py-2">{patient.race}</td>
+                      <td className="border px-4 py-2">{patient.ethnicity}</td>
+                      <td className="border px-4 py-2">{patient.insurance}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+  
+              {/* Records Info */}
+              <div className="mt-4">
+                <p className="text-right">
+                  {filteredPatientRecordsCount} out of {totalPatientRecords}{" "}
+                  patient records: {patientPercentage}% of patients
+                </p>
+              </div>
+              {/* Add New Patient */}
+              <div>
+                <h2 className="text-xl font-semibold mb-4">Add New Patient</h2>
+                <div className="grid grid-cols-2 gap-4">
+                  <input
+                    type="text"
+                    name="firstName"
+                    placeholder="First Name"
+                    value={newUser.firstName}
+                    onChange={handleNewUserChange}
+                    className="input"
+                  />
+                  <input
+                    type="text"
+                    name="lastName"
+                    placeholder="Last Name"
+                    value={newUser.lastName}
+                    onChange={handleNewUserChange}
+                    className="input"
+                  />
+                  <input
+                    type="email"
+                    name="emailAddress"
+                    placeholder="Email"
+                    value={newUser.emailAddress}
+                    onChange={handleNewUserChange}
+                    className="input"
+                  />
+                  <input
+                    type="date"
+                    name="dateOfBirth"
+                    placeholder="Date of Birth"
+                    value={newUser.dateOfBirth}
+                    onChange={handleNewUserChange}
+                    className="input"
+                  />
+                  <input
+                    type="text"
                     name="race"
-                    value={filters.race}
-                    onChange={handleFilterChange}
-                    className="input w-full"
-                  >
-                    <option value="">Filter by Race</option>
-                    <option value="White">White</option>
-                    <option value="Black or African American">
-                      Black or African American
-                    </option>
-                    <option value="Asian">Asian</option>
-                  </select>
-                  <select
+                    placeholder="Race"
+                    value={newUser.race}
+                    onChange={handleNewUserChange}
+                    className="input"
+                  />
+                  <input
+                    type="text"
                     name="ethnicity"
-                    value={filters.ethnicity}
-                    onChange={handleFilterChange}
-                    className="input w-full"
-                  >
-                    <option value="">Filter by Ethnicity</option>
-                    <option value="Hispanic">Hispanic</option>
-                    <option value="Non-Hispanic">Non-Hispanic</option>
-                  </select>
+                    placeholder="Ethnicity"
+                    value={newUser.ethnicity}
+                    onChange={handleNewUserChange}
+                    className="input"
+                  />
+                  <input
+                    type="text"
+                    name="occupation"
+                    placeholder="Occupation"
+                    value={newUser.occupation}
+                    onChange={handleNewUserChange}
+                    className="input"
+                  />
                   <select
                     name="insurance"
-                    value={filters.insurance}
-                    onChange={handleFilterChange}
+                    value={newUser.insurance}
+                    onChange={handleNewUserChange}
                     className="input w-full"
                   >
-                    <option value="">Filter by Insurance</option>
+                    <option value="">Has Insurance?</option>
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
                   </select>
-                  <input
-                    type="number"
-                    name="age"
-                    placeholder="Filter by Age"
-                    value={filters.age}
-                    onChange={handleFilterChange}
-                    className="input w-full"
-                  />
                 </div>
-              </>
-            )}
-            <button
-              onClick={() => setSelectedTab("By Service")}
-              className="block"
-            >
-              <div className="space-y-4">
-              By Service
-              </div>
-              
-            </button>
-
-           
-          </div>
-        )}
-      </div>
-
-      {/* Main Content */}
-      <div className={`flex-1 p-6 transition-all duration-300`}>
-        {/* Sidebar Toggle Icon */}
-        <div
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="mb-4 cursor-pointer text-2xl bg-gray-200 hover:bg-gray-300 p-2 rounded-full inline-block"
-        >
-          {isSidebarOpen ? <FiArrowLeft /> : <FiMenu />}
-        </div>
-
-        {selectedTab === "By Patient" ? (
-          <>
-            <h1 className="text-3xl font-bold mb-4">Patient Records</h1>
-
-            {/* Search Bar */}
-            <input
-              type="text"
-              placeholder="Search by any attribute"
-              value={searchTerm}
-              onChange={handleSearch}
-              className="input mb-4 w-full"
-            />
-
-            {/* Patient List */}
-            <table className="table-auto w-full mb-8">
-              <thead>
-                <tr>
-                  <th className="px-4 py-2">ID</th>
-                  <th className="px-4 py-2">First Name</th>
-                  <th className="px-4 py-2">Last Name</th>
-                  <th className="px-4 py-2">Email</th>
-                  <th className="px-4 py-2">DOB</th>
-                  <th className="px-4 py-2">Age</th>
-                  <th className="px-4 py-2">Occupation</th>
-                  <th className="px-4 py-2">Race</th>
-                  <th className="px-4 py-2">Ethnicity</th>
-                  <th className="px-4 py-2">Insurance</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredData.map((patient) => (
-                  <tr key={patient.id}>
-                    <td className="border px-4 py-2">{patient.id}</td>
-                    <td className="border px-4 py-2">{patient.firstName}</td>
-                    <td className="border px-4 py-2">{patient.lastName}</td>
-                    <td className="border px-4 py-2">{patient.emailAddress}</td>
-                    <td className="border px-4 py-2">{patient.dateOfBirth}</td>
-                    <td className="border px-4 py-2">{patient.age}</td>
-                    <td className="border px-4 py-2">{patient.occupation}</td>
-                    <td className="border px-4 py-2">{patient.race}</td>
-                    <td className="border px-4 py-2">{patient.ethnicity}</td>
-                    <td className="border px-4 py-2">{patient.insurance}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-
-            {/* Records Info */}
-            <div className="mt-4">
-              <p className="text-right">
-                {filteredPatientRecordsCount} out of {totalPatientRecords}{" "}
-                patient records: {patientPercentage}% of patients
-              </p>
-            </div>
-              {/* Add New Patient */}
-              <div>
-              <h2 className="text-xl font-semibold mb-4">Add New Patient</h2>
-              <div className="grid grid-cols-2 gap-4">
-                <input
-                  type="text"
-                  name="firstName"
-                  placeholder="First Name"
-                  value={newUser.firstName}
-                  onChange={handleNewUserChange}
-                  className="input"
-                />
-                <input
-                  type="text"
-                  name="lastName"
-                  placeholder="Last Name"
-                  value={newUser.lastName}
-                  onChange={handleNewUserChange}
-                  className="input"
-                />
-                <input
-                  type="email"
-                  name="emailAddress"
-                  placeholder="Email"
-                  value={newUser.emailAddress}
-                  onChange={handleNewUserChange}
-                  className="input"
-                />
-                <input
-                  type="date"
-                  name="dateOfBirth"
-                  placeholder="Date of Birth"
-                  value={newUser.dateOfBirth}
-                  onChange={handleNewUserChange}
-                  className="input"
-                />
-                <input
-                  type="text"
-                  name="race"
-                  placeholder="Race"
-                  value={newUser.race}
-                  onChange={handleNewUserChange}
-                  className="input"
-                />
-                <input
-                  type="text"
-                  name="ethnicity"
-                  placeholder="Ethnicity"
-                  value={newUser.ethnicity}
-                  onChange={handleNewUserChange}
-                  className="input"
-                />
-                <input
-                  type="text"
-                  name="occupation"
-                  placeholder="Occupation"
-                  value={newUser.occupation}
-                  onChange={handleNewUserChange}
-                  className="input"
-                />
-                <select
-                  name="insurance"
-                  value={newUser.insurance}
-                  onChange={handleNewUserChange}
-                  className="input"
+                <button
+                  onClick={handleAddUser}
+                  className="mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
                 >
-                  <option value="">Select Insurance</option>
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </select>
+                  Add User
+                </button>
               </div>
-              <button
-                onClick={handleAddUser}
-                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
-              >
-                Add Patient
-              </button>
-            </div>
-          </>
-        ) : (
-          <>
-            <h1 className="text-3xl font-bold mb-4">Service Records</h1>
-
-            {/* Search Bar */}
-            <input
-              type="text"
-              placeholder="Search services"
-              value={searchTerm}
-              onChange={handleSearch}
-              className="input mb-4 w-full"
-            />
-
-            {/* Service List */}
-            <table className="table-auto w-full mb-8">
-              <thead>
-                <tr>
-                  <th className="px-4 py-2">ID</th>
-                  <th className="px-4 py-2">Date Attended</th>
-                  <th className="px-4 py-2">Service Type</th>
-                  <th className="px-4 py-2">Patient Name</th>
-                  <th className="px-4 py-2">DOB</th>
-                  <th className="px-4 py-2">Report</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredServices.map((service) => (
-                  <tr key={service.id}>
-                    <td className="border px-4 py-2">{service.id}</td>
-                    <td className="border px-4 py-2">{service.dateAttended}</td>
-                    <td className="border px-4 py-2">{service.serviceType}</td>
-                    <td className="border px-4 py-2">{`${service.patientFirstName} ${service.patientLastName}`}</td>
-                    <td className="border px-4 py-2">{service.dateOfBirth}</td>
-                    <td className="border px-4 py-2">
-                      <a
-                        href={service.report}
-                        download
-                        className="text-blue-500"
-                      >
-                        Download Report
-                      </a>
-                    </td>
+            </>
+          ) : selectedTab === "By Service" ? (
+            <>
+              <h1 className="text-3xl font-bold mb-4">Services</h1>
+              <input
+                type="text"
+                placeholder="Search by any attribute"
+                value={searchTerm}
+                onChange={handleSearch}
+                className="input mb-4 w-full"
+              />
+  
+              {/* Service List */}
+              <table className="table-auto w-full mb-8">
+                <thead>
+                  <tr>
+                    <th className="px-4 py-2">ID</th>
+                    <th className="px-4 py-2">Date Attended</th>
+                    <th className="px-4 py-2">Service Type</th>
+                    <th className="px-4 py-2">Patient Name</th>
+                    <th className="px-4 py-2">Patient DOB</th>
+                    <th className="px-4 py-2">Report</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-
-            {/* Records Info */}
-            <div className="mt-4">
-              <p className="text-right">
-                {filteredServiceRecordsCount} out of {totalServiceRecords}{" "}
-                service records: {servicePercentage}% of services
-              </p>
-            </div>
-            {/* Add New Service */}
-            <div>
-              <h2 className="text-xl font-semibold mb-4">Add New Service</h2>
-              <div className="grid grid-cols-2 gap-4">
-                <input
-                  type="text"
-                  name="serviceType"
-                  placeholder="Service Type"
-                  value={newService.serviceType}
-                  onChange={handleNewServiceChange}
-                  className="input"
-                />
-                <input
-                  type="text"
-                  name="patientFirstName"
-                  placeholder="Patient First Name"
-                  value={newService.patientFirstName}
-                  onChange={handleNewServiceChange}
-                  className="input"
-                />
-                <input
-                  type="text"
-                  name="patientLastName"
-                  placeholder="Patient Last Name"
-                  value={newService.patientLastName}
-                  onChange={handleNewServiceChange}
-                  className="input"
-                />
-                <input
-                  type="date"
-                  name="dateOfBirth"
-                  placeholder="Date of Birth"
-                  value={newService.dateOfBirth}
-                  onChange={handleNewServiceChange}
-                  className="input"
-                />
-                <input
-                  type="date"
-                  name="dateAttended"
-                  placeholder="Date Attended"
-                  value={newService.dateAttended}
-                  onChange={handleNewServiceChange}
-                  className="input"
-                />
-                <input
-                  type="file"
-                  name="report"
-                  placeholder="Report"
-                  onChange={handleNewServiceChange}
-                  className="input"
-                />
+                </thead>
+                <tbody>
+                  {filteredServices.map((service) => (
+                    <tr key={service.id}>
+                      <td className="border px-4 py-2">{service.id}</td>
+                      <td className="border px-4 py-2">{service.dateAttended}</td>
+                      <td className="border px-4 py-2">{service.serviceType}</td>
+                      <td className="border px-4 py-2">{service.patientName}</td>
+                      <td className="border px-4 py-2">{service.patientDOB}</td>
+                      <td className="border px-4 py-2">{service.report}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </>
+          ) : selectedTab === "User Feedback" && showFeedback ? (
+            <>
+              <h1 className="text-3xl font-bold mb-4">User Feedback</h1>
+              {/* Render User Feedback */}
+              <div className="mb-8">
+              {showFeedback && (
+              <div>
+                <h2>User Feedback</h2>
+                {feedbacks.length > 0 ? (
+                  feedbacks.map((feedback) => (
+                    <div
+                      key={feedback.id}
+                      className="bg-white shadow-md rounded-lg p-4 mb-4"
+                    >
+                      <p className="text-lg text-gray-700">{feedback.content}</p>
+                      <p className="text-sm text-gray-500">Rating: {feedback.rating}</p>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-gray-500">No feedback available</p>
+                )}
               </div>
-              <button
-                onClick={handleAddService}
-                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
-              >
-                Add Service
-              </button>
-            </div>
-
-          </>
-        )}
+            )}
+              </div>
+            </>
+          ) : (
+            <p>No feedback available</p>
+          )}
+        </div>
       </div>
-    </div>
-  );
-};
-
-export default AdminDashboard;
+    );
+  };
+  
+  export default AdminDashboard;

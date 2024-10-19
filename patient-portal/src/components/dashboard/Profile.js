@@ -22,6 +22,9 @@ export default function Profile() {
     occupation: "Software Engineer",
     userType: "admin",
     employmentStatus: "employed",
+    race: "", // New field
+    ethnicity: "", // New field
+    insurance: "", // New field
   });
 
   const [currentPage, setCurrentPage] = useState(1); // Track the current page
@@ -171,6 +174,53 @@ export default function Profile() {
           >
             <option value="employed">Employed</option>
             <option value="non-employed">Non-employed</option>
+          </select>
+        </div>
+
+        {/* New Fields: Race, Ethnicity, and Insurance */}
+        <div className="space-y-2">
+          <Label htmlFor="race">Race</Label>
+          <select
+            id="race"
+            value={profile.race}
+            onChange={(e) => handleChange("race", e.target.value)}
+            className="border p-2 rounded w-full bg-gray-100 text-black"
+          >
+            <option value="">Select Race</option>
+            <option value="white">White</option>
+            <option value="black">Black or African American</option>
+            <option value="asian">Asian</option>
+=            <option value="native_american">Native American</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="ethnicity">Ethnicity</Label>
+          <select
+            id="ethnicity"
+            value={profile.ethnicity}
+            onChange={(e) => handleChange("ethnicity", e.target.value)}
+            className="border p-2 rounded w-full bg-gray-100 text-black"
+          >
+            <option value="">Select Ethnicity</option>
+            <option value="hispanic">Hispanic or Latino</option>
+            <option value="not_hispanic">Not Hispanic or Latino</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="insurance">Insurance</Label>
+          <select
+            id="insurance"
+            value={profile.insurance}
+            onChange={(e) => handleChange("insurance", e.target.value)}
+            className="border p-2 rounded w-full bg-gray-100 text-black"
+          >
+            <option value="">Select Insurance Status</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
           </select>
         </div>
       </CardContent>
