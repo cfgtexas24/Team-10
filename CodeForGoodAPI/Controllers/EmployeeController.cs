@@ -34,7 +34,7 @@ public class EmployeeController
     }
 
     [HttpPost("Create")]
-    public JsonResult Create(EmployeeDto employee)
+    public JsonResult Create([FromBody] EmployeeDto employee)
     {
         var success = _employeeService.CreateEmployee(employee);
         return new JsonResult(new { success });

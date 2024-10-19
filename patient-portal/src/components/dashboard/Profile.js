@@ -31,9 +31,12 @@ export default function Profile() {
 
   const handleSaveChanges = async () => {
     // Handle the save action (you can extend this to send the data to an API later)
-    const url = "http://ec2-3-83-143-244.compute-1.amazonaws.com:5000/"
+    const url = "http://ec2-3-83-143-244.compute-1.amazonaws.com:5000/Patient/Create";
     const request = await fetch(url, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: {
         firstName: profile.firstName,
         lastName: profile.lastName,

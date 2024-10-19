@@ -34,7 +34,7 @@ public class StoryController
     }
 
     [HttpPost("Create")]
-    public JsonResult Create(StoryDto dto)
+    public JsonResult Create([FromBody] StoryDto dto)
     {
         var success = _storyService.Create(dto);
         return new JsonResult(new {success});

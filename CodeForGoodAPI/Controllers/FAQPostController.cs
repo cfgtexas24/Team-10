@@ -36,7 +36,7 @@ public class FAQPostController
     }
 
     [HttpPost("Add")]
-    public JsonResult Add(FAQPostDto faqPost)
+    public JsonResult Add([FromBody] FAQPostDto faqPost)
     {
         var success = _faqPostService.CreateFAQPost(faqPost);
         return new JsonResult(new { success });

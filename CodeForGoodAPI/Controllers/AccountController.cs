@@ -31,7 +31,7 @@ public class AccountController
     }
 
     [HttpPost("CreateAccount")]
-    public JsonResult CreateAccount(AccountDto accountDto)
+    public JsonResult CreateAccount([FromBody] AccountDto accountDto)
     {
         var success = _accountService.CreateAccount(accountDto);
         return new JsonResult(new { success });
