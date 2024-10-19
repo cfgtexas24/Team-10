@@ -13,6 +13,7 @@ public class Patient
     public DateTime DateOfBirth { get; set; }
     public string Gender { get; set; }
     public string UserType { get; set; }
+    // To do: add public string Occupation { get; set; }
 
     public PatientDto ConvertToDto()
     {
