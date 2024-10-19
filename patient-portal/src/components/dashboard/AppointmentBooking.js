@@ -8,9 +8,11 @@ const AppointmentForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Concatenate the date and time into one string
+    const appointmentDateTime = `${appointmentDate}T${appointmentTime}`;
+
     const appointmentData = {
-      appointmentDate,
-      appointmentTime,
+      appointmentDateTime,  // Use the concatenated date and time
       appointmentReason,
     };
 
