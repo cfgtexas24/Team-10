@@ -23,7 +23,7 @@ public class StoryReplyController
     }
 
     [HttpPost("Create")]
-    public JsonResult CreateStoryReply(StoryReplyDto reply)
+    public JsonResult CreateStoryReply([FromBody] StoryReplyDto reply)
     {
         var success = _storyReplyService.AddStoryReply(reply);
         return new JsonResult(new { success });
