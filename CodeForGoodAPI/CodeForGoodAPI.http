@@ -1,0 +1,6 @@
+@CodeForGoodAPI_HostAddress = http://localhost:5193
+
+GET {{CodeForGoodAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
