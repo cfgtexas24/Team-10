@@ -1,7 +1,9 @@
 using CodeForGoodAPI;
 using CodeForGoodAPI.Models;
+using CodeForGoodAPI.Services.Accounts;
 using CodeForGoodAPI.Services.Patients;
-using CodeForGoodAPI.Services.Employees;
+using CodeForGoodAPI.Services.Stories;
+using CodeForGoodAPI.Services.StoryReplies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +21,19 @@ string connectionString = builder.Configuration.GetConnectionString("DefaultConn
 builder.Services.AddDbContext<BaseDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IPatientService, PatientService>();
+builder.Services.AddScoped<IStoryService, StoryService>();
+builder.Services.AddScoped<IStoryReplyService, StoryReplyService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
 #endregion
 
 var app = builder.Build();
@@ -27,11 +42,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseCors("AllowAll");
 }
 
 // sa account password: Password1!
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
