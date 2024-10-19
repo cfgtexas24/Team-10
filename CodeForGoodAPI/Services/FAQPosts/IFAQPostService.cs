@@ -8,4 +8,5 @@ public interface IFAQPostService
     public List<FAQPostDto> GetFAQPosts();
     public bool CreateFAQPost(FAQPostDto dto);
     public bool DeleteFAQPost(int id);
+    public bool EditFAQPost(FAQPostDto dto);
 }

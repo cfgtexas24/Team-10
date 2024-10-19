@@ -48,4 +48,22 @@ public class FAQPostController
         var success = _faqPostService.DeleteFAQPost(id);
         return new JsonResult(new { success });
     }
+
+    [HttpPost("AnswerFAQ/{id}")]
+    public JsonResult AnswerFAQ(int id, [FromBody] AnswerFAQDto answer)
+    {
+        var faq = _faqPostService.GetFAQPost(id);
+        if (faq == null)
+        {
+            return new JsonResult(new { success = false, message = "Post not found." });
+        }
+        faq.Answer = answer.Answer;
+        _faqPostService.EditFAQPost(faq);
+        return new JsonResult(new { success = true });
+    }
+
+    public class AnswerFAQDto
+    {
+        public string Answer { get; set; }
+    }
 }

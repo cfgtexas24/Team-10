@@ -44,4 +44,18 @@ public class FAQPostService : IFAQPostService
         _context.SaveChanges();
         return true;
     }
+
+    public bool EditFAQPost(FAQPostDto dto)
+    {
+        var post = _context.FAQPosts.FirstOrDefault(post => post.Id == dto.Id);
+        if (post == null)
+        {
+            return false;
+        }
+        post.Question = dto.Question;
+        post.Answer = dto.Answer;
+        _context.FAQPosts.Update(post);
+        _context.SaveChanges();
+        return true;
+    }
 }
