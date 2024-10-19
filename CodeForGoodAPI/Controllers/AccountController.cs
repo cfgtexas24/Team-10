@@ -16,9 +16,9 @@ public class AccountController
     }
 
     [HttpPost("Login")]
-    public JsonResult Login(string username, string password)
+    public JsonResult Login([FromBody] AccountDto dto)
     {
-        var userLogin = _accountService.AccountLogin(username, password);
+        var userLogin = _accountService.AccountLogin(dto.Username, dto.Password);
 
         if (userLogin == null)
         {
@@ -26,14 +26,14 @@ public class AccountController
         }
         else
         {
-            return new JsonResult(new { success = true });
+            return new JsonResult(new { success = true, message = "" });
         }
     }
 
     [HttpPost("CreateAccount")]
-    public JsonResult CreateAccount(AccountDto accountDto)
+    public JsonResult CreateAccount([FromBody] AccountDto accountDto)
     {
-        _accountService.CreateAccount(accountDto);
-        return new JsonResult(new { success = true });
+        var success = _accountService.CreateAccount(accountDto);
+        return new JsonResult(new { success });
     }
 }
