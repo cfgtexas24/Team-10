@@ -40,7 +40,7 @@ public class StoryController
         return new JsonResult(new {success});
     }
 
-    [HttpPost("Delete")]
+    [HttpPost("Delete/{id}")]
     public JsonResult Delete(int id)
     {
         var success = _storyService.Delete(id);
