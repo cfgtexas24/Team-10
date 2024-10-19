@@ -4,6 +4,7 @@ using CodeForGoodAPI.Services.Accounts;
 using CodeForGoodAPI.Services.Patients;
 using CodeForGoodAPI.Services.Stories;
 using CodeForGoodAPI.Services.StoryReplies;
+using CodeForGoodAPI.Services.Employees;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
