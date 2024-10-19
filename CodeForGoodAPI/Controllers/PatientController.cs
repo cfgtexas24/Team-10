@@ -35,7 +35,7 @@ public class PatientController
     }
 
     [HttpPost("Create")]
-    public JsonResult Create(PatientDto patient)
+    public JsonResult Create([FromBody] PatientDto patient)
     {
         var success = _patientService.CreatePatient(patient);
         return new JsonResult(new {success});

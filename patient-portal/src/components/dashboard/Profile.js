@@ -23,6 +23,7 @@ export default function Profile() {
     gender: "male",
     occupation: "Software Engineer",
     userType: "admin",
+    employmentStatus: "employed", // Added employment status
   });
 
   const handleChange = (field, value) => {
@@ -31,17 +32,21 @@ export default function Profile() {
 
   const handleSaveChanges = async () => {
     // Handle the save action (you can extend this to send the data to an API later)
-    const url = "http://ec2-3-83-143-244.compute-1.amazonaws.com:5000/"
+    const url =
+      "http://ec2-3-83-143-244.compute-1.amazonaws.com:5000/Patient/Create";
     const request = await fetch(url, {
       method: "POST",
-      body: {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
         firstName: profile.firstName,
         lastName: profile.lastName,
         emailAddress: profile.email,
         dateOfBirth: profile.dob,
         gender: profile.gender,
-        occupation: profile.occupation
-      }
+        occupation: profile.occupation,
+      }),
     });
 
     const response = await request.json();
@@ -51,7 +56,6 @@ export default function Profile() {
     } else {
       alert("Something failed! Check the network tab.");
     }
-    
 
     console.log(profile);
   };
@@ -165,10 +169,20 @@ export default function Profile() {
             className="w-full bg-gray-800 text-white placeholder-gray-400"
           />
         </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="employmentStatus">Employment Status</Label>
+          <select
+            id="employmentStatus"
+            value={profile.employmentStatus}
+            onChange={(e) => handleChange("employmentStatus", e.target.value)}
+            className="border p-2 rounded w-full bg-gray-800 text-white placeholder-gray-400"
+          >
+            <option value="employed">Employed</option>
+            <option value="non-employed">Non-employed</option>
+          </select>
+        </div>
       </CardContent>
-      <CardFooter className="flex justify-end">
-        <Button onClick={handleSaveChanges}>Save Changes</Button>
-      </CardFooter>
     </Card>
   );
 }
