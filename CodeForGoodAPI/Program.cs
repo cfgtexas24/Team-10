@@ -4,6 +4,7 @@ using CodeForGoodAPI.Services.Accounts;
 using CodeForGoodAPI.Services.Patients;
 using CodeForGoodAPI.Services.Stories;
 using CodeForGoodAPI.Services.StoryReplies;
+using CodeForGoodAPI.Services.Employees;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,7 @@ string connectionString = builder.Configuration.GetConnectionString("DefaultConn
 
 #region Dependency Injection
 builder.Services.AddDbContext<BaseDbContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IPatientService, PatientService>();
 builder.Services.AddScoped<IStoryService, StoryService>();
 builder.Services.AddScoped<IStoryReplyService, StoryReplyService>();
