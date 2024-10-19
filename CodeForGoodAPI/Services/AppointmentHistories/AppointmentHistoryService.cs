@@ -29,6 +29,12 @@ public class AppointmentHistoryService : IAppointmentHistoryService
         return appointmentHistories.Select(x => x.ConvertToDto()).ToList();
     }
 
+    public List<AppointmentHistoryDto> GetAppointmentHistories()
+    {
+        var appointmentHistories = _context.AppointmentHistories.ToList();
+        return appointmentHistories.Select(x => x.ConvertToDto()).ToList();
+    }
+
     public bool AddAppointmentHistory(AppointmentHistoryDto appointmentHistory)
     {
         var appointmentHistoryEntity = appointmentHistory.ConvertToEntity();

@@ -35,6 +35,13 @@ public class AppointmentHistoryController
         return new JsonResult(patientHistories);
     }
 
+    [HttpGet("GetAllHistories")]
+    public JsonResult GetAllHistories()
+    {
+        var allHistories = _appointmentHistoryService.GetAppointmentHistories();
+        return new JsonResult(allHistories);
+    }
+
     [HttpPost("AddAppointmentHistory")]
     public JsonResult AddAppointmentHistory([FromBody] AppointmentHistoryDto appointmentHistory)
     {

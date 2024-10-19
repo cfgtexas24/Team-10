@@ -58,10 +58,10 @@ export default function FAQ() {
   };
 
   const postAnswerData = async (faqId, newAnswer) => {
-    const url = `http://ec2-3-83-143-244.compute-1.amazonaws.com:5000/FAQPost/Update/${faqId}`;
+    const url = `http://ec2-3-83-143-244.compute-1.amazonaws.com:5000/FAQPost/AnswerFAQ/${faqId}`;
     try {
       const request = await fetch(url, {
-        method: "PUT",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
@@ -86,7 +86,7 @@ export default function FAQ() {
     const url = `http://ec2-3-83-143-244.compute-1.amazonaws.com:5000/FAQPost/Delete/${faqId}`;
     try {
       const request = await fetch(url, {
-        method: "DELETE",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
@@ -98,7 +98,7 @@ export default function FAQ() {
 
       const data = await request.json();
       alert("Question deleted successfully!");
-      fetchFAQData();
+      await fetchFAQData();
     } catch (error) {
       console.error("Error deleting question:", error);
     }
@@ -166,18 +166,15 @@ export default function FAQ() {
               <AccordionTrigger>{faq.question}</AccordionTrigger>
               <AccordionContent>
                 <p>
-                  {Array.isArray(faq.answers) && faq.answers.length > 0
-                    ? "Submitted Answers:"
+                  {faq.answer?.length > 0
+                    ? "Submitted Answer: "
                     : "No answers yet."}
                 </p>
 
                 {/* Display all submitted answers */}
-                {Array.isArray(faq.answers) &&
-                  faq.answers.map((answer, idx) => (
-                    <div key={idx} className="border-b p-2">
-                      {answer}
-                    </div>
-                  ))}
+                <div>
+                  {faq.answer}
+                </div>
 
                 {/* Input to answer the question */}
                 <input
