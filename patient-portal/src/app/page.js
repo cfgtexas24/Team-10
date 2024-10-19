@@ -9,6 +9,7 @@ import AppointmentBooking from '../components/dashboard/AppointmentBooking'; // 
 import Login from '../app/login';
 import { useRouter } from 'next/navigation';
 import { MantineProvider } from '@mantine/core';
+import { useUser, UserProvider } from '@/context/UserContext';
 
 export default function Component() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
@@ -17,6 +18,7 @@ export default function Component() {
   const [email, setEmail] = useState('john.doe@example.com');
   const [isAdmin, setIsAdmin] = useState(false); // Track if the user is an admin
   const router = useRouter();
+  const { setUserId } = useUser();
 
   const handleLogin = async (email, password, isAdminStatus) => {
     try {
@@ -27,7 +29,7 @@ export default function Component() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ username: email, password: password }), // Send the email and password in the request body
+          body: JSON.stringify({ username: email, password: password}), // Send the email and password in the request body
         }
       );
 
@@ -39,9 +41,11 @@ export default function Component() {
 
       // Check if the authentication is successful
       if (data.success) {
+        setUserId(data.accountId);
+        setIsAdmin(data.patientId === null);
         setIsLoggedIn(true); // Update login status
         // Optionally, save the token or user information
-        localStorage.setItem("token", data.token); // Save token in localStorage (if applicable)
+        localStorage.setItem("accountId", data.accountId); // Save token in localStorage (if applicable)
       } else {
         alert(data.message); // Show error message
       }
@@ -64,51 +68,66 @@ export default function Component() {
           Patient Dashboard
         </h1>
 
-        {isAdmin && (
-          <div className="absolute top-4 right-4">
-            <button
-              className="btn-primary"
-              onClick={() => router.push("/dashboard")}
-            >
-              Go to Dashboard
-            </button>
-          </div>
-        )}
+        {isAdmin && router.push("/dashboard")}
 
-        {/* Tabs (Original Style with Manual onClick) */}
+        {/* Tabs with hover effect */}
         <div className="flex w-full justify-center space-x-4 mb-6 border-b-2 border-gray-200">
           <button
-            className={`px-4 py-2 ${activeTab === 'profile' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`}
+            className={`px-4 py-2 ${
+              activeTab === 'profile'
+                ? 'border-b-2 border-[#A26B61] text-[#5f452e] shadow-md shadow-[#6C5846]'
+                : 'text-black hover:text-[#453221]'
+            }`}
             onClick={() => setActiveTab('profile')}
           >
             Profile
           </button>
           <button
-            className={`px-4 py-2 ${activeTab === 'story' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`}
+            className={`px-4 py-2 ${
+              activeTab === 'story'
+                ? 'border-b-2 border-[#A26B61] text-[#5f452e] shadow-md shadow-[#6C5846]'
+                : 'text-black hover:text-[#453221]'
+            }`}
             onClick={() => setActiveTab('story')}
           >
-            Your Story
+            Testimony
           </button>
           <button
-            className={`px-4 py-2 ${activeTab === 'resources' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`}
+            className={`px-4 py-2 ${
+              activeTab === 'resources'
+                ? 'border-b-2 border-[#A26B61] text-[#5f452e] shadow-md shadow-[#6C5846]'
+                : 'text-black hover:text-[#453221]'
+            }`}
             onClick={() => setActiveTab('resources')}
           >
             Resources
           </button>
           <button
-            className={`px-4 py-2 ${activeTab === 'appointment' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`}
+            className={`px-4 py-2 ${
+              activeTab === 'appointment'
+                ? 'border-b-2 border-[#A26B61] text-[#5f452e] shadow-md shadow-[#6C5846]'
+                : 'text-black hover:text-[#453221]'
+            }`}
             onClick={() => setActiveTab('appointment')}
           >
             Appointment
           </button>
           <button
-            className={`px-4 py-2 ${activeTab === 'feedback' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`}
+            className={`px-4 py-2 ${
+              activeTab === 'feedback'
+                ? 'border-b-2 border-[#A26B61] text-[#5f452e] shadow-md shadow-[#6C5846]'
+                : 'text-black hover:text-[#453221]'
+            }`}
             onClick={() => setActiveTab('feedback')}
           >
             Feedback
           </button>
           <button
-            className={`px-4 py-2 ${activeTab === 'faq' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`}
+            className={`px-4 py-2 ${
+              activeTab === 'faq'
+                ? 'border-b-2 border-[#A26B61] text-[#5f452e] shadow-lg shadow-[#6C5846]'
+                : 'text-black hover:text-[#453221]'
+            }`}
             onClick={() => setActiveTab('faq')}
           >
             FAQ
@@ -118,7 +137,12 @@ export default function Component() {
         {/* Render Content based on Active Tab */}
         <div className="tab-content">
           {activeTab === 'profile' && (
-            <Profile name={name} email={email} setName={setName} setEmail={setEmail} />
+            <Profile
+              name={name}
+              email={email}
+              setName={setName}
+              setEmail={setEmail}
+            />
           )}
 
           {activeTab === 'story' && <Story />}

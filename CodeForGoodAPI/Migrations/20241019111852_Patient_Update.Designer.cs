@@ -4,6 +4,7 @@ using CodeForGoodAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodeForGoodAPI.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    partial class BaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241019111852_Patient_Update")]
+    partial class Patient_Update
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,6 +32,9 @@ namespace CodeForGoodAPI.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AccountType")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -149,9 +155,6 @@ namespace CodeForGoodAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AccountId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
@@ -187,9 +190,6 @@ namespace CodeForGoodAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccountId")
-                        .IsUnique();
 
                     b.ToTable("Patients");
                 });
@@ -259,17 +259,6 @@ namespace CodeForGoodAPI.Migrations
                     b.Navigation("Account");
                 });
 
-            modelBuilder.Entity("CodeForGoodAPI.Models.Patient", b =>
-                {
-                    b.HasOne("CodeForGoodAPI.Models.Account", "Account")
-                        .WithOne("Patient")
-                        .HasForeignKey("CodeForGoodAPI.Models.Patient", "AccountId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Account");
-                });
-
             modelBuilder.Entity("CodeForGoodAPI.Models.StoryReply", b =>
                 {
                     b.HasOne("CodeForGoodAPI.Models.Story", "Story")
@@ -284,8 +273,6 @@ namespace CodeForGoodAPI.Migrations
             modelBuilder.Entity("CodeForGoodAPI.Models.Account", b =>
                 {
                     b.Navigation("Feedbacks");
-
-                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("CodeForGoodAPI.Models.Patient", b =>

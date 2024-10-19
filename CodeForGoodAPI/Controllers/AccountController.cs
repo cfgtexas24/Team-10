@@ -26,7 +26,7 @@ public class AccountController
         }
         else
         {
-            return new JsonResult(new { success = true, accountType = userLogin.AccountType, accountId = userLogin.Id });
+            return new JsonResult(new { success = true, patientId = userLogin.Patient?.Id, accountId = userLogin.Id });
         }
     }
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Profile2 from "@/components/dashboard/Profile2"; // Import Profile2 component
+import { Button } from "@mantine/core";
 import {
   Card,
   CardContent,
@@ -10,7 +10,6 @@ import {
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
 import { Avatar, AvatarImage } from "@/components/ui/Avatar";
-import { Button } from "@/components/ui/Button";
 
 export default function Profile() {
   const [profile, setProfile] = useState({
@@ -24,67 +23,52 @@ export default function Profile() {
     employmentStatus: "employed",
   });
 
-  const [currentPage, setCurrentPage] = useState(1); // Track the current page
-
   const handleChange = (field, value) => {
     setProfile((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleNextPage = () => {
-    setCurrentPage((prev) => prev + 1); // Go to the next page
+  const handleSubmit = () => {
+    console.log("Profile submitted:", profile);
+
+    // Display alert pop-up
+    alert("Profile updated successfully!");
   };
 
-  const handlePreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prev) => prev - 1); // Go to the previous page
-    }
-  };
-
-  // Render Profile2 when on the second page
-  if (currentPage === 2) {
-    return (
-      <Profile2
-        profile={profile}
-        handleChange={handleChange}
-        handleNextPage={handleNextPage}
-        handlePreviousPage={handlePreviousPage}
-      />
-    );
-  }
-
-  // Render Profile (first page) without the "Previous Page" button
   return (
-    <Card className="max-w-4xl mx-auto mt-10 shadow-lg rounded-lg">
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold text-center">
+    <Card className="max-w-4xl mx-auto mt-10 shadow-lg rounded-lg bg-gradient-to-b from-[#A26B61] to-[#6C5846] text-white animate-fade-in">
+      <CardHeader className="flex flex-col justify-center items-center">
+        <CardTitle className="text-3xl font-bold text-center text-black">
           User Profile
         </CardTitle>
-        <CardDescription className="text-center">
+        <CardDescription className="text-center text-black">
           Manage your patient information here.
         </CardDescription>
       </CardHeader>
+
       <CardContent className="grid grid-cols-2 gap-4">
         <div className="col-span-2 flex flex-col items-center mb-4">
-          <Avatar className="w-24 h-24">
+          <Avatar className="w-24 h-24 shadow-lg border-2 border-[#6C5846]">
             <AvatarImage
-              src="https://i.postimg.cc/ZnVLdjVg/Screenshot-2024-10-19-at-5-18-22-AM.png" // Direct link to the image
+              src="https://i.postimg.cc/ZnVLdjVg/Screenshot-2024-10-19-at-5-18-22-AM.png"
               alt={`${profile.firstName} ${profile.lastName}`}
+              className="rounded-full"
             />
           </Avatar>
-          <p className="text-black mt-2">
+          <p className="text-white mt-2">
             {profile.firstName[0]}
             {profile.lastName[0]}
-          </p>{" "}
-          {/* Centered initials */}
+          </p>
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="userType">User Type</Label>
+          <Label htmlFor="userType" className="text-white">
+            User Type
+          </Label>
           <select
             id="userType"
             value={profile.userType}
             onChange={(e) => handleChange("userType", e.target.value)}
-            className="border p-2 rounded w-full bg-gray-100 text-black"
+            className="border p-2 rounded w-full bg-[#d39388] text-[#313131] focus:ring-2 focus:ring-[#6C5846] focus:border-[#6C5846] transition duration-300 ease-in-out"
           >
             <option value="admin">Admin</option>
             <option value="patient">Patient</option>
@@ -92,12 +76,14 @@ export default function Profile() {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="gender">Gender</Label>
+          <Label htmlFor="gender" className="text-white">
+            Gender
+          </Label>
           <select
             id="gender"
             value={profile.gender}
             onChange={(e) => handleChange("gender", e.target.value)}
-            className="border p-2 rounded w-full bg-gray-100 text-black"
+            className="border p-2 rounded w-full bg-[#d39388] text-[#313131] focus:ring-2 focus:ring-[#6C5846] focus:border-[#6C5846] transition duration-300 ease-in-out"
           >
             <option value="male">Male</option>
             <option value="female">Female</option>
@@ -106,76 +92,94 @@ export default function Profile() {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="firstName">First Name</Label>
+          <Label htmlFor="firstName" className="text-white">
+            First Name
+          </Label>
           <Input
             id="firstName"
             value={profile.firstName}
             onChange={(e) => handleChange("firstName", e.target.value)}
             placeholder="First Name"
-            className="w-full bg-gray-100 text-black"
+            className="w-full bg-[#D3E2E4] text-[#313131] border border-[#6C5846] rounded-lg focus:ring-2 focus:ring-[#6C5846] transition-all duration-300"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="lastName">Last Name</Label>
+          <Label htmlFor="lastName" className="text-white">
+            Last Name
+          </Label>
           <Input
             id="lastName"
             value={profile.lastName}
             onChange={(e) => handleChange("lastName", e.target.value)}
             placeholder="Last Name"
-            className="w-full bg-gray-100 text-black"
+            className="w-full bg-[#D3E2E4] text-[#313131] border border-[#6C5846] rounded-lg focus:ring-2 focus:ring-[#6C5846] transition-all duration-300"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email" className="text-white">
+            Email
+          </Label>
           <Input
             id="email"
             type="email"
             value={profile.email}
             onChange={(e) => handleChange("email", e.target.value)}
             placeholder="Email Address"
-            className="w-full bg-gray-100 text-black"
+            className="w-full bg-[#D3E2E4] text-[#313131] border border-[#6C5846] rounded-lg focus:ring-2 focus:ring-[#6C5846] transition-all duration-300"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="dob">Date of Birth</Label>
+          <Label htmlFor="dob" className="text-white">
+            Date of Birth
+          </Label>
           <Input
             id="dob"
             type="date"
             value={profile.dob}
             onChange={(e) => handleChange("dob", e.target.value)}
-            className="w-full bg-gray-100 text-black"
+            className="w-full bg-[#D3E2E4] text-[#313131] border border-[#6C5846] rounded-lg focus:ring-2 focus:ring-[#6C5846] transition-all duration-300"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="occupation">Occupation</Label>
+          <Label htmlFor="occupation" className="text-white">
+            Occupation
+          </Label>
           <Input
             id="occupation"
             value={profile.occupation}
             onChange={(e) => handleChange("occupation", e.target.value)}
             placeholder="Occupation"
-            className="w-full bg-gray-100 text-black"
+            className="w-full bg-[#D3E2E4] text-[#313131] border border-[#6C5846] rounded-lg focus:ring-2 focus:ring-[#6C5846] transition-all duration-300"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="employmentStatus">Employment Status</Label>
+          <Label htmlFor="employmentStatus" className="text-white">
+            Employment Status
+          </Label>
           <select
             id="employmentStatus"
             value={profile.employmentStatus}
             onChange={(e) => handleChange("employmentStatus", e.target.value)}
-            className="border p-2 rounded w-full bg-gray-100 text-black"
+            className="border p-2 rounded w-full bg-[#d39388] text-[#313131] focus:ring-2 focus:ring-[#6C5846] focus:border-[#6C5846] transition duration-300 ease-in-out"
           >
             <option value="employed">Employed</option>
             <option value="non-employed">Non-employed</option>
           </select>
         </div>
       </CardContent>
+
       <div className="flex justify-end p-4">
-        <Button onClick={handleNextPage}>Next Page</Button>
+        <Button
+          onClick={handleSubmit}
+          className="bg-[#A26B61] text-white px-4 py-2 rounded-lg shadow-lg hover:bg-[#6C5846] transition-all duration-300 transform hover:scale-105"
+        >
+          Submit
+        </Button>
       </div>
     </Card>
   );

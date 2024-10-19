@@ -9,10 +9,9 @@ public class Account
     public int Id { get; set; }
     public string Username { get; set; }
     public string Password { get; set; }
-    // One of 'patient' | 'admin'
-    public string? AccountType { get; set; }
     
     // Navigation props
+    public Patient? Patient { get; set; }
     public ICollection<Feedback> Feedbacks { get; set; }
 
     public AccountDto ConvertToDto()
@@ -22,7 +21,7 @@ public class Account
             Id = Id,
             Username = Username,
             Password = Password,
-            AccountType = AccountType
+            Patient = Patient?.ConvertToDto()
         };
     }
 }
