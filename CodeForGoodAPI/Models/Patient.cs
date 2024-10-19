@@ -34,7 +34,8 @@ public class Patient
             Occupation = Occupation,
             Ethnicity = Ethnicity,
             Race = Race,
-            IsInsured = IsInsured
+            IsInsured = IsInsured,
+            AccountId = AccountId,
         };
     }
 }
