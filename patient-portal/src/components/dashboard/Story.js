@@ -71,13 +71,10 @@ export default function SpotlightGrid() {
   return (
     <div className="grid grid-cols-1 gap-4">
       {articles.map((article, index) => (
-        <Card
-          key={index}
-          className="w-full p-4 bg-gray-800 rounded-lg shadow-md"
-        >
+        <Card key={index} className="w-full p-4 bg-white rounded-lg shadow-md">
           <CardContent>
             <h2
-              className="text-xl font-semibold text-white cursor-pointer"
+              className="text-xl font-semibold text-black cursor-pointer hover:text-gray-700 transition duration-300"
               onClick={() =>
                 setSelectedTab(selectedTab === index ? null : index)
               } // Toggle tabs
@@ -86,11 +83,11 @@ export default function SpotlightGrid() {
             </h2>
             {selectedTab === index && (
               <div className="mt-4">
-                <p className="text-gray-400">{article.story}</p>
-                <h3 className="mt-4 text-lg font-semibold text-white">
+                <p className="text-gray-600">{article.story}</p>
+                <h3 className="mt-4 text-lg font-semibold text-black">
                   Comments:
                 </h3>
-                <ul className="list-disc list-inside text-gray-300">
+                <ul className="list-disc list-inside text-gray-600">
                   {article.comments.map((comment, i) => (
                     <li key={i} className="mt-2">
                       {comment}
@@ -101,13 +98,13 @@ export default function SpotlightGrid() {
                 <div className="mt-4">
                   <input
                     type="text"
-                    className="w-full p-2 rounded bg-gray-700 text-white"
+                    className="w-full p-2 rounded bg-gray-100 text-black placeholder-gray-500"
                     placeholder="Add your comment"
                     value={newComment}
                     onChange={(e) => setNewComment(e.target.value)}
                   />
                   <button
-                    className="mt-2 p-2 bg-blue-600 text-white rounded hover:bg-blue-500"
+                    className="mt-2 p-2 bg-blue-600 text-white rounded hover:bg-blue-500 transition duration-300"
                     onClick={() => handleAddComment(index)}
                   >
                     Add Comment
