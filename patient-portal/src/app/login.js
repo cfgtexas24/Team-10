@@ -40,7 +40,8 @@ const Login = ({ onLogin }) => {
               className="w-full p-3 rounded-lg border border-[#6C5846] focus:border-[#3A696E] focus:ring focus:ring-[#3A696E] focus:ring-opacity-50 transition-all duration-300 outline-none"
               required
               value={email}
-              onChange={(e) => setEmail(e.target.value)} // Update email state
+              onChange={(e) => setEmail(e.target.value)}
+              style={{ color: '#000', '::placeholder': { color: '#6C5846' } }} 
             />
           </div>
 
@@ -55,7 +56,8 @@ const Login = ({ onLogin }) => {
               className="w-full p-3 rounded-lg border border-[#6C5846] focus:border-[#3A696E] focus:ring focus:ring-[#3A696E] focus:ring-opacity-50 transition-all duration-300 outline-none"
               required
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)} 
+              style={{ color: '#000', '::placeholder': { color: '#6C5846' } }} 
             />
           </div>
 
