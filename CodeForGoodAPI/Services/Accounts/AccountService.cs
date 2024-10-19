@@ -3,6 +3,7 @@ using CodeForGoodAPI.Models;
 using CodeForGoodAPI.Services.Accounts.Dto;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodeForGoodAPI.Services.Accounts;
 
@@ -25,7 +26,7 @@ public class AccountService : IAccountService
 
     public AccountDto? AccountLogin(string username, string password)
     {
-        var account = _context.Accounts.FirstOrDefault(a => a.Username == username);
+        var account = _context.Accounts.Include(p => p.Patient).FirstOrDefault(a => a.Username == username);
         if (account == null)
         {
             return null;

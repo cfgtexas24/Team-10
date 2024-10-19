@@ -16,8 +16,10 @@ public class Patient
     public string Ethnicity { get; set; }
     public string Race { get; set; }
     public bool IsInsured { get; set; }
+    public int AccountId { get; set; }
 
     public ICollection<AppointmentHistory> AppointmentHistories { get; set; }
+    public Account Account { get; set; }
 
     public PatientDto ConvertToDto()
     {
@@ -32,7 +34,8 @@ public class Patient
             Occupation = Occupation,
             Ethnicity = Ethnicity,
             Race = Race,
-            IsInsured = IsInsured
+            IsInsured = IsInsured,
+            AccountId = AccountId,
         };
     }
 }
