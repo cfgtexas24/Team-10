@@ -20,7 +20,7 @@ export default function Component() {
   const [isAdmin, setIsAdmin] = useState(false); // Track if the user is an admin
   const router = useRouter();
 
-  const handleLogin = async (email, password) => {
+  const handleLogin = async (email, password, isAdminStatus) => {
     try {
       const response = await fetch('http://ec2-3-83-143-244.compute-1.amazonaws.com:5000/Account/Login', {
         method: 'POST',
@@ -29,17 +29,17 @@ export default function Component() {
         },
         body: JSON.stringify({ username: email, password: password }), // Send the email and password in the request body
       });
-
+  
       if (!response.ok) {
         throw new Error('Login failed!'); // Handle unsuccessful login
       }
-
+  
       const data = await response.json();
-
+  
       // Check if the authentication is successful
       if (data.success) {
         setIsLoggedIn(true); // Update login status
-        // Optionally, save the token or user information
+        setIsAdmin(isAdminStatus); // Update admin status based on checkbox
         localStorage.setItem('token', data.token); // Save token in localStorage (if applicable)
       } else {
         alert(data.message); // Show error message
@@ -49,6 +49,7 @@ export default function Component() {
       alert('An error occurred during login. Please try again.'); // Show error to the user
     }
   };
+  
 
   // If not logged in, show login page
   if (!isLoggedIn) {
