@@ -37,13 +37,17 @@ const patientData = [
 ];
 
 const serviceData = [
-  { id: 1, dateAttended: '2024-01-15', serviceType: 'Pregnancy Test', patientFirstName: 'Emily', patientLastName: 'Johnson', dateOfBirth: '1990-05-14', report: 'report1.pdf' },
-  { id: 2, dateAttended: '2024-01-20', serviceType: 'Ultrasound', patientFirstName: 'Sophia', patientLastName: 'Brown', dateOfBirth: '1985-11-23', report: 'report2.pdf' },
-  { id: 3, dateAttended: '2024-01-25', serviceType: 'Prenatal Care', patientFirstName: 'Isabella', patientLastName: 'Martinez', dateOfBirth: '1992-03-02', report: 'report3.pdf' },
-  { id: 4, dateAttended: '2024-02-01', serviceType: 'Postpartum Care', patientFirstName: 'Mia', patientLastName: 'Garcia', dateOfBirth: '1996-07-19', report: 'report4.pdf' },
-  { id: 5, dateAttended: '2024-02-05', serviceType: 'Group Prenatal Care', patientFirstName: 'Amelia', patientLastName: 'Davis', dateOfBirth: '1991-12-10', report: 'report5.pdf' },
+  { id: 1, dateAttended: '2024-01-15', serviceType: 'Pregnancy Test', patientName: 'Emily Johnson', patientDOB: '1990-05-14', report: 'report1.pdf' },
+  { id: 2, dateAttended: '2024-01-20', serviceType: 'Ultrasound', patientName: 'Sophia Brown', patientDOB: '1985-11-23', report: 'report2.pdf' },
+  { id: 3, dateAttended: '2024-01-25', serviceType: 'Prenatal Care', patientName: 'Isabella Martinez', patientDOB: '1992-03-02', report: 'report3.pdf' },
+  { id: 4, dateAttended: '2024-02-01', serviceType: 'Postpartum Care', patientName: 'Mia Garcia', patientDOB: '1996-07-19', report: 'report4.pdf' },
+  { id: 5, dateAttended: '2024-02-05', serviceType: 'Group Prenatal Care', patientName: 'Amelia Davis', patientDOB: '1991-12-10', report: 'report5.pdf' },
+  { id: 6, dateAttended: '2024-02-10', serviceType: 'Prenatal Education', patientName: 'Olivia Clark', patientDOB: '1988-04-25', report: 'report6.pdf' },
+  { id: 7, dateAttended: '2024-02-15', serviceType: 'Labor and Delivery', patientName: 'Ava Rodriguez', patientDOB: '1993-08-12', report: 'report7.pdf' },
+  { id: 8, dateAttended: '2024-02-20', serviceType: 'Routine Checkup', patientName: 'Charlotte Lopez', patientDOB: '1986-09-30', report: 'report8.pdf' },
+  { id: 9, dateAttended: '2024-02-25', serviceType: 'Vaccination', patientName: 'Harper Hill', patientDOB: '1995-11-18', report: 'report9.pdf' },
+  { id: 10, dateAttended: '2024-03-01', serviceType: 'Postnatal Follow-up', patientName: 'Evelyn Green', patientDOB: '1994-06-05', report: 'report10.pdf' },
 ];
-
 
 const AdminDashboard = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -407,7 +411,7 @@ const AdminDashboard = () => {
             </>
           ) : selectedTab === "By Service" ? (
             <>
-              <h1 className="text-3xl font-bold mb-4">Services</h1>
+              <h1 className="text-3xl font-bold mb-4">Service Records</h1>
               <input
                 type="text"
                 placeholder="Search by any attribute"
