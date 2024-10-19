@@ -66,6 +66,7 @@ export default function Component() {
         <h1 className="text-3xl font-bold text-center mb-6">
           Patient Dashboard
         </h1>
+        {console.log(isAdmin)}
 
         {isAdmin && (
           <div className="absolute top-4 right-4">
