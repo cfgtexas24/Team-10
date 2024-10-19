@@ -33,5 +33,13 @@ public class BaseDbContext : DbContext
             .WithOne(f => f.Account)
             .HasForeignKey(f => f.AccountId)
             .OnDelete(DeleteBehavior.Cascade);
+        
+        modelBuilder.Entity<Account>()
+            .HasOne(a => a.Patient)
+            .WithOne(a => a.Account)
+            .HasForeignKey<Patient>(a => a.AccountId)   
+            .OnDelete(DeleteBehavior.Restrict);
+        
+        base.OnModelCreating(modelBuilder);
     }
 }
