@@ -11,6 +11,9 @@ public class Account
     public string Password { get; set; }
     // One of 'patient' | 'admin'
     public string? AccountType { get; set; }
+    
+    // Navigation props
+    public ICollection<Feedback> Feedbacks { get; set; }
 
     public AccountDto ConvertToDto()
     {

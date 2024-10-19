@@ -4,6 +4,7 @@ using CodeForGoodAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodeForGoodAPI.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    partial class BaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241019095424_Appointment_History")]
+    partial class Appointment_History
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -119,31 +122,6 @@ namespace CodeForGoodAPI.Migrations
                     b.ToTable("FAQPosts");
                 });
 
-            modelBuilder.Entity("CodeForGoodAPI.Models.Feedback", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AccountId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AccountId");
-
-                    b.ToTable("Feedback");
-                });
-
             modelBuilder.Entity("CodeForGoodAPI.Models.Patient", b =>
                 {
                     b.Property<int>("Id")
@@ -234,17 +212,6 @@ namespace CodeForGoodAPI.Migrations
                     b.Navigation("Patient");
                 });
 
-            modelBuilder.Entity("CodeForGoodAPI.Models.Feedback", b =>
-                {
-                    b.HasOne("CodeForGoodAPI.Models.Account", "Account")
-                        .WithMany("Feedbacks")
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Account");
-                });
-
             modelBuilder.Entity("CodeForGoodAPI.Models.StoryReply", b =>
                 {
                     b.HasOne("CodeForGoodAPI.Models.Story", "Story")
@@ -254,11 +221,6 @@ namespace CodeForGoodAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("Story");
-                });
-
-            modelBuilder.Entity("CodeForGoodAPI.Models.Account", b =>
-                {
-                    b.Navigation("Feedbacks");
                 });
 
             modelBuilder.Entity("CodeForGoodAPI.Models.Patient", b =>

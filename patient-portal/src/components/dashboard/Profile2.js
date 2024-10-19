@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
+import { Avatar, AvatarImage } from "@/components/ui/Avatar";
 import { Button } from "@/components/ui/Button";
 
 export default function Profile2({
@@ -28,17 +28,18 @@ export default function Profile2({
         </CardDescription>
       </CardHeader>
       <CardContent className="grid grid-cols-2 gap-4">
-        <div className="col-span-2 flex justify-center mb-4">
+        <div className="col-span-2 flex flex-col items-center mb-4">
           <Avatar className="w-24 h-24">
             <AvatarImage
-              src="/placeholder.svg"
+              src="https://i.postimg.cc/ZnVLdjVg/Screenshot-2024-10-19-at-5-18-22-AM.png" // Direct link to the image
               alt={`${profile.firstName} ${profile.lastName}`}
             />
-            <AvatarFallback>
-              {profile.firstName[0]}
-              {profile.lastName[0]}
-            </AvatarFallback>
           </Avatar>
+          <p className="text-black mt-2">
+            {profile.firstName[0]}
+            {profile.lastName[0]}
+          </p>{" "}
+          {/* Centered initials */}
         </div>
 
         <div className="space-y-2">
@@ -48,7 +49,7 @@ export default function Profile2({
             value={profile.firstName}
             onChange={(e) => handleChange("firstName", e.target.value)}
             placeholder="First Name"
-            className="w-full bg-gray-800 text-white placeholder-gray-400"
+            className="w-full bg-gray-100 text-black"
           />
         </div>
 
@@ -59,7 +60,7 @@ export default function Profile2({
             value={profile.lastName}
             onChange={(e) => handleChange("lastName", e.target.value)}
             placeholder="Last Name"
-            className="w-full bg-gray-800 text-white placeholder-gray-400"
+            className="w-full bg-gray-100 text-black"
           />
         </div>
 
@@ -71,7 +72,7 @@ export default function Profile2({
             value={profile.email}
             onChange={(e) => handleChange("email", e.target.value)}
             placeholder="Email Address"
-            className="w-full bg-gray-800 text-white placeholder-gray-400"
+            className="w-full bg-gray-100 text-black"
           />
         </div>
 
@@ -82,7 +83,7 @@ export default function Profile2({
             type="date"
             value={profile.dob}
             onChange={(e) => handleChange("dob", e.target.value)}
-            className="w-full bg-gray-800 text-white placeholder-gray-400"
+            className="w-full bg-gray-100 text-black"
           />
         </div>
 
@@ -93,15 +94,16 @@ export default function Profile2({
             value={profile.occupation}
             onChange={(e) => handleChange("occupation", e.target.value)}
             placeholder="Occupation"
-            className="w-full bg-gray-800 text-white placeholder-gray-400"
+            className="w-full bg-gray-100 text-black"
           />
         </div>
       </CardContent>
-      <CardFooter className="flex justify-between">
+
+      {/* Move Buttons to Bottom Right */}
+      <div className="flex justify-end p-4 space-x-4">
         <Button onClick={handlePreviousPage}>Previous Page</Button>
-        <Button onClick={handleNextPage}>Next Page</Button>{" "}
-        {/* For future pages */}
-      </CardFooter>
+        <Button onClick={handleNextPage}>Next Page</Button>
+      </div>
     </Card>
   );
 }
