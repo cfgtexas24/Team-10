@@ -3,127 +3,45 @@
 import { useState } from 'react';
 import { FiMenu, FiArrowLeft } from 'react-icons/fi'; // Importing icons from react-icons
 
-const mockData = [
-  {
-    id: 1,
-    firstName: 'Emily',
-    lastName: 'Johnson',
-    emailAddress: 'emily.johnson@example.com',
-    dateOfBirth: '1990-05-14',
-    age: 34,
-    occupation: 'Teacher',
-    race: 'White',
-    ethnicity: 'Non-Hispanic',
-    insurance: 'Yes',
-  },
-  {
-    id: 2,
-    firstName: 'Sophia',
-    lastName: 'Brown',
-    emailAddress: 'sophia.brown@example.com',
-    dateOfBirth: '1985-11-23',
-    age: 38,
-    occupation: 'Nurse',
-    race: 'Black or African American',
-    ethnicity: 'Non-Hispanic',
-    insurance: 'No',
-  },
-  {
-    id: 3,
-    firstName: 'Isabella',
-    lastName: 'Martinez',
-    emailAddress: 'isabella.martinez@example.com',
-    dateOfBirth: '1992-03-02',
-    age: 32,
-    occupation: 'Software Engineer',
-    race: 'Asian',
-    ethnicity: 'Hispanic',
-    insurance: 'Yes',
-  },
-  {
-    id: 4,
-    firstName: 'Mia',
-    lastName: 'Garcia',
-    emailAddress: 'mia.garcia@example.com',
-    dateOfBirth: '1996-07-19',
-    age: 28,
-    occupation: 'Accountant',
-    race: 'White',
-    ethnicity: 'Hispanic',
-    insurance: 'Yes',
-  },
-  {
-    id: 5,
-    firstName: 'Amelia',
-    lastName: 'Davis',
-    emailAddress: 'amelia.davis@example.com',
-    dateOfBirth: '1991-12-10',
-    age: 33,
-    occupation: 'Marketing Specialist',
-    race: 'Black or African American',
-    ethnicity: 'Non-Hispanic',
-    insurance: 'No',
-  },
-  {
-    id: 6,
-    firstName: 'Charlotte',
-    lastName: 'Miller',
-    emailAddress: 'charlotte.miller@example.com',
-    dateOfBirth: '1987-04-25',
-    age: 37,
-    occupation: 'Architect',
-    race: 'Asian',
-    ethnicity: 'Non-Hispanic',
-    insurance: 'Yes',
-  },
-  {
-    id: 7,
-    firstName: 'Harper',
-    lastName: 'Rodriguez',
-    emailAddress: 'harper.rodriguez@example.com',
-    dateOfBirth: '1995-06-17',
-    age: 29,
-    occupation: 'Pharmacist',
-    race: 'White',
-    ethnicity: 'Hispanic',
-    insurance: 'No',
-  },
-  {
-    id: 8,
-    firstName: 'Evelyn',
-    lastName: 'Martinez',
-    emailAddress: 'evelyn.martinez@example.com',
-    dateOfBirth: '1988-09-03',
-    age: 36,
-    occupation: 'Graphic Designer',
-    race: 'Native Hawaiian or Other Pacific Islander',
-    ethnicity: 'Non-Hispanic',
-    insurance: 'Yes',
-  },
-  {
-    id: 9,
-    firstName: 'Abigail',
-    lastName: 'Lee',
-    emailAddress: 'abigail.lee@example.com',
-    dateOfBirth: '1993-01-15',
-    age: 31,
-    occupation: 'Social Worker',
-    race: 'Asian',
-    ethnicity: 'Non-Hispanic',
-    insurance: 'No',
-  },
-  {
-    id: 10,
-    firstName: 'Avery',
-    lastName: 'Perez',
-    emailAddress: 'avery.perez@example.com',
-    dateOfBirth: '1997-08-12',
-    age: 27,
-    occupation: 'Lawyer',
-    race: 'White',
-    ethnicity: 'Hispanic',
-    insurance: 'Yes',
-  }
+const patientData = [
+  { id: 1, firstName: 'Emily', lastName: 'Johnson', emailAddress: 'emily.johnson@example.com', dateOfBirth: '1990-05-14', age: 34, occupation: 'Teacher', race: 'White', ethnicity: 'Non-Hispanic', insurance: 'Yes' },
+  { id: 2, firstName: 'Sophia', lastName: 'Brown', emailAddress: 'sophia.brown@example.com', dateOfBirth: '1985-11-23', age: 38, occupation: 'Nurse', race: 'Black or African American', ethnicity: 'Non-Hispanic', insurance: 'No' },
+  { id: 3, firstName: 'Isabella', lastName: 'Martinez', emailAddress: 'isabella.martinez@example.com', dateOfBirth: '1992-03-02', age: 32, occupation: 'Software Engineer', race: 'Asian', ethnicity: 'Hispanic', insurance: 'Yes' },
+  { id: 4, firstName: 'Mia', lastName: 'Garcia', emailAddress: 'mia.garcia@example.com', dateOfBirth: '1996-07-19', age: 28, occupation: 'Accountant', race: 'White', ethnicity: 'Hispanic', insurance: 'Yes' },
+  { id: 5, firstName: 'Amelia', lastName: 'Davis', emailAddress: 'amelia.davis@example.com', dateOfBirth: '1991-12-10', age: 33, occupation: 'Marketing Specialist', race: 'Black or African American', ethnicity: 'Non-Hispanic', insurance: 'No' },
+  { id: 6, firstName: 'Charlotte', lastName: 'Miller', emailAddress: 'charlotte.miller@example.com', dateOfBirth: '1987-04-25', age: 37, occupation: 'Architect', race: 'Asian', ethnicity: 'Non-Hispanic', insurance: 'Yes' },
+  { id: 7, firstName: 'Harper', lastName: 'Rodriguez', emailAddress: 'harper.rodriguez@example.com', dateOfBirth: '1995-06-17', age: 29, occupation: 'Pharmacist', race: 'White', ethnicity: 'Hispanic', insurance: 'No' },
+  { id: 8, firstName: 'Evelyn', lastName: 'Martinez', emailAddress: 'evelyn.martinez@example.com', dateOfBirth: '1988-09-03', age: 36, occupation: 'Graphic Designer', race: 'Native Hawaiian or Other Pacific Islander', ethnicity: 'Non-Hispanic', insurance: 'Yes' },
+  { id: 9, firstName: 'Abigail', lastName: 'Lee', emailAddress: 'abigail.lee@example.com', dateOfBirth: '1993-01-15', age: 31, occupation: 'Social Worker', race: 'Asian', ethnicity: 'Non-Hispanic', insurance: 'No' },
+  { id: 10, firstName: 'Avery', lastName: 'Perez', emailAddress: 'avery.perez@example.com', dateOfBirth: '1997-08-12', age: 27, occupation: 'Lawyer', race: 'White', ethnicity: 'Hispanic', insurance: 'Yes' },
+  { id: 11, firstName: 'Sofia', lastName: 'Lopez', emailAddress: 'sofia.lopez@example.com', dateOfBirth: '1989-02-09', age: 35, occupation: 'Data Scientist', race: 'Hispanic', ethnicity: 'Non-Hispanic', insurance: 'Yes' },
+  { id: 12, firstName: 'Liam', lastName: 'Martinez', emailAddress: 'liam.martinez@example.com', dateOfBirth: '1994-07-22', age: 30, occupation: 'Civil Engineer', race: 'White', ethnicity: 'Non-Hispanic', insurance: 'No' },
+  { id: 13, firstName: 'Lucas', lastName: 'Hernandez', emailAddress: 'lucas.hernandez@example.com', dateOfBirth: '1986-03-14', age: 38, occupation: 'Physician', race: 'Asian', ethnicity: 'Hispanic', insurance: 'Yes' },
+  { id: 14, firstName: 'Mason', lastName: 'Anderson', emailAddress: 'mason.anderson@example.com', dateOfBirth: '1990-12-05', age: 33, occupation: 'Web Developer', race: 'Black or African American', ethnicity: 'Non-Hispanic', insurance: 'No' },
+  { id: 15, firstName: 'Ava', lastName: 'Thomas', emailAddress: 'ava.thomas@example.com', dateOfBirth: '1995-11-19', age: 28, occupation: 'Biologist', race: 'White', ethnicity: 'Hispanic', insurance: 'Yes' },
+  { id: 16, firstName: 'Ella', lastName: 'Wilson', emailAddress: 'ella.wilson@example.com', dateOfBirth: '1992-08-23', age: 31, occupation: 'Veterinarian', race: 'Asian', ethnicity: 'Non-Hispanic', insurance: 'Yes' },
+  { id: 17, firstName: 'Scarlett', lastName: 'Moore', emailAddress: 'scarlett.moore@example.com', dateOfBirth: '1988-10-14', age: 35, occupation: 'Physical Therapist', race: 'Black or African American', ethnicity: 'Non-Hispanic', insurance: 'No' },
+  { id: 18, firstName: 'Grace', lastName: 'Taylor', emailAddress: 'grace.taylor@example.com', dateOfBirth: '1996-04-20', age: 28, occupation: 'Chef', race: 'Native Hawaiian or Other Pacific Islander', ethnicity: 'Non-Hispanic', insurance: 'Yes' },
+  { id: 19, firstName: 'Chloe', lastName: 'Anderson', emailAddress: 'chloe.anderson@example.com', dateOfBirth: '1993-09-30', age: 30, occupation: 'Graphic Artist', race: 'White', ethnicity: 'Hispanic', insurance: 'Yes' },
+  { id: 20, firstName: 'Ethan', lastName: 'Davis', emailAddress: 'ethan.davis@example.com', dateOfBirth: '1984-05-11', age: 40, occupation: 'Financial Analyst', race: 'Black or African American', ethnicity: 'Non-Hispanic', insurance: 'No' },
+  { id: 21, firstName: 'Henry', lastName: 'Gonzalez', emailAddress: 'henry.gonzalez@example.com', dateOfBirth: '1991-07-03', age: 33, occupation: 'Operations Manager', race: 'Asian', ethnicity: 'Hispanic', insurance: 'Yes' },
+  { id: 22, firstName: 'Oliver', lastName: 'Parker', emailAddress: 'oliver.parker@example.com', dateOfBirth: '1995-01-27', age: 29, occupation: 'Project Manager', race: 'White', ethnicity: 'Non-Hispanic', insurance: 'Yes' },
+  { id: 23, firstName: 'Jack', lastName: 'Johnson', emailAddress: 'jack.johnson@example.com', dateOfBirth: '1992-02-18', age: 32, occupation: 'Network Engineer', race: 'Black or African American', ethnicity: 'Non-Hispanic', insurance: 'No' },
+  { id: 24, firstName: 'Luna', lastName: 'Garcia', emailAddress: 'luna.garcia@example.com', dateOfBirth: '1994-08-21', age: 29, occupation: 'UX Designer', race: 'Native Hawaiian or Other Pacific Islander', ethnicity: 'Non-Hispanic', insurance: 'Yes' },
+  { id: 25, firstName: 'Aiden', lastName: 'Lopez', emailAddress: 'aiden.lopez@example.com', dateOfBirth: '1989-06-12', age: 35, occupation: 'Insurance Agent', race: 'White', ethnicity: 'Hispanic', insurance: 'No' },
+  { id: 26, firstName: 'James', lastName: 'Martinez', emailAddress: 'james.martinez@example.com', dateOfBirth: '1983-10-30', age: 40, occupation: 'Teacher', race: 'Asian', ethnicity: 'Non-Hispanic', insurance: 'Yes' },
+  { id: 27, firstName: 'Mila', lastName: 'Brown', emailAddress: 'mila.brown@example.com', dateOfBirth: '1992-01-16', age: 32, occupation: 'Research Scientist', race: 'Black or African American', ethnicity: 'Hispanic', insurance: 'Yes' },
+  { id: 28, firstName: 'Ella', lastName: 'Wilson', emailAddress: 'ella.wilson@example.com', dateOfBirth: '1996-05-15', age: 28, occupation: 'Quality Assurance Tester', race: 'White', ethnicity: 'Non-Hispanic', insurance: 'No' },
+  { id: 29, firstName: 'Zoe', lastName: 'Thompson', emailAddress: 'zoe.thompson@example.com', dateOfBirth: '1984-04-21', age: 40, occupation: 'Software Engineer', race: 'Asian', ethnicity: 'Hispanic', insurance: 'Yes' },
+  { id: 30, firstName: 'Liam', lastName: 'Williams', emailAddress: 'liam.williams@example.com', dateOfBirth: '1989-02-14', age: 35, occupation: 'Business Analyst', race: 'Black or African American', ethnicity: 'Non-Hispanic', insurance: 'No' },
+];
+
+const serviceData = [
+  { id: 1, dateAttended: '2024-01-15', serviceType: 'Pregnancy Test', patientFirstName: 'Emily', patientLastName: 'Johnson', dateOfBirth: '1990-05-14', report: 'report1.pdf' },
+  { id: 2, dateAttended: '2024-01-20', serviceType: 'Ultrasound', patientFirstName: 'Sophia', patientLastName: 'Brown', dateOfBirth: '1985-11-23', report: 'report2.pdf' },
+  { id: 3, dateAttended: '2024-01-25', serviceType: 'Prenatal Care', patientFirstName: 'Isabella', patientLastName: 'Martinez', dateOfBirth: '1992-03-02', report: 'report3.pdf' },
+  { id: 4, dateAttended: '2024-02-01', serviceType: 'Postpartum Care', patientFirstName: 'Mia', patientLastName: 'Garcia', dateOfBirth: '1996-07-19', report: 'report4.pdf' },
+  { id: 5, dateAttended: '2024-02-05', serviceType: 'Group Prenatal Care', patientFirstName: 'Amelia', patientLastName: 'Davis', dateOfBirth: '1991-12-10', report: 'report5.pdf' },
 ];
 
 const AdminDashboard = () => {
@@ -142,7 +60,7 @@ const AdminDashboard = () => {
     race: '',
     ethnicity: '',
     insurance: '',
-    age: ''
+    age: '' // Add filter for age
   });
 
   // State for sidebar visibility
@@ -168,7 +86,7 @@ const AdminDashboard = () => {
       newUser.insurance // Ensure insurance is provided
     ) {
       const newUserEntry = { id: mockData.length + 1, ...newUser };
-      mockData.push(newUserEntry); // Adding new patient to mock data
+      patientData.push(newUserEntry); // Adding new patient to mock data
       setNewUser({
         firstName: '',
         lastName: '',
@@ -186,7 +104,7 @@ const AdminDashboard = () => {
     setFilters({ ...filters, [e.target.name]: e.target.value });
   };
 
-  const filteredData = mockData.filter((patient) => {
+  const filteredData = patientData.filter((patient) => {
     const searchMatches = Object.values(patient).some((value) =>
       value.toString().toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -200,7 +118,7 @@ const AdminDashboard = () => {
     return searchMatches && filterMatches;
   });
 
-  const totalRecords = mockData.length;
+  const totalRecords = patientData.length;
   const filteredRecordsCount = filteredData.length;
   const percentage = totalRecords ? ((filteredRecordsCount / totalRecords) * 100).toFixed(2) : 0;
 
