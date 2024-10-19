@@ -69,16 +69,7 @@ export default function Component() {
         </h1>
         {console.log(isAdmin)}
 
-        {isAdmin && (
-          <div className="absolute top-4 right-4">
-            <button
-              className="btn-primary"
-              onClick={() => router.push("/dashboard")}
-            >
-              Go to Dashboard
-            </button>
-          </div>
-        )}
+        {isAdmin && router.push("/dashboard")}
 
         {/* Tabs with hover effect */}
         <div className="flex w-full justify-center space-x-4 mb-6 border-b-2 border-gray-200">
