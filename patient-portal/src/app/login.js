@@ -48,20 +48,6 @@ const Login = ({ onLogin }) => {
             />
           </div>
 
-          {/* Checkbox for admin status */}
-          <div className="flex items-center">
-            <input
-              type="checkbox"
-              id="admin"
-              checked={isAdmin}
-              onChange={(e) => setIsAdmin(e.target.checked)} // Update isAdmin state
-              className="mr-2"
-            />
-            <label htmlFor="admin" className="label">
-              Login as Admin
-            </label>
-          </div>
-
           <button type="submit" className="btn-primary w-full">
             Sign in
           </button>
