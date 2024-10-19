@@ -7,6 +7,7 @@ using CodeForGoodAPI.Services.Stories;
 using CodeForGoodAPI.Services.StoryReplies;
 using CodeForGoodAPI.Services.Employees;
 using CodeForGoodAPI.Services.FAQPosts;
+using CodeForGoodAPI.Services.Feedback;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,6 +31,7 @@ builder.Services.AddScoped<IStoryReplyService, StoryReplyService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IFAQPostService, FAQPostService>();
 builder.Services.AddScoped<IAppointmentHistoryService, AppointmentHistoryService>();
+builder.Services.AddScoped<IFeedbackService, FeedbackService>();
 
 builder.Services.AddCors(options =>
 {

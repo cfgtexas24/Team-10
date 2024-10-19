@@ -3,15 +3,14 @@ import Profile2 from "@/components/dashboard/Profile2"; // Import Profile2 compo
 import {
   Card,
   CardContent,
-  CardFooter,
   CardHeader,
   CardTitle,
   CardDescription,
 } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
+import { Avatar, AvatarImage } from "@/components/ui/Avatar";
 import { Button } from "@/components/ui/Button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 
 export default function Profile() {
   const [profile, setProfile] = useState({
@@ -65,17 +64,18 @@ export default function Profile() {
         </CardDescription>
       </CardHeader>
       <CardContent className="grid grid-cols-2 gap-4">
-        <div className="col-span-2 flex justify-center mb-4">
+        <div className="col-span-2 flex flex-col items-center mb-4">
           <Avatar className="w-24 h-24">
             <AvatarImage
-              src="/placeholder.svg"
+              src="https://i.postimg.cc/ZnVLdjVg/Screenshot-2024-10-19-at-5-18-22-AM.png" // Direct link to the image
               alt={`${profile.firstName} ${profile.lastName}`}
             />
-            <AvatarFallback>
-              {profile.firstName[0]}
-              {profile.lastName[0]}
-            </AvatarFallback>
           </Avatar>
+          <p className="text-black mt-2">
+            {profile.firstName[0]}
+            {profile.lastName[0]}
+          </p>{" "}
+          {/* Centered initials */}
         </div>
 
         <div className="space-y-2">
@@ -84,7 +84,7 @@ export default function Profile() {
             id="userType"
             value={profile.userType}
             onChange={(e) => handleChange("userType", e.target.value)}
-            className="border p-2 rounded w-full bg-gray-800 text-white placeholder-gray-400"
+            className="border p-2 rounded w-full bg-gray-100 text-black"
           >
             <option value="admin">Admin</option>
             <option value="patient">Patient</option>
@@ -97,7 +97,7 @@ export default function Profile() {
             id="gender"
             value={profile.gender}
             onChange={(e) => handleChange("gender", e.target.value)}
-            className="border p-2 rounded w-full bg-gray-800 text-white placeholder-gray-400"
+            className="border p-2 rounded w-full bg-gray-100 text-black"
           >
             <option value="male">Male</option>
             <option value="female">Female</option>
@@ -112,7 +112,7 @@ export default function Profile() {
             value={profile.firstName}
             onChange={(e) => handleChange("firstName", e.target.value)}
             placeholder="First Name"
-            className="w-full bg-gray-800 text-white placeholder-gray-400"
+            className="w-full bg-gray-100 text-black"
           />
         </div>
 
@@ -123,7 +123,7 @@ export default function Profile() {
             value={profile.lastName}
             onChange={(e) => handleChange("lastName", e.target.value)}
             placeholder="Last Name"
-            className="w-full bg-gray-800 text-white placeholder-gray-400"
+            className="w-full bg-gray-100 text-black"
           />
         </div>
 
@@ -135,7 +135,7 @@ export default function Profile() {
             value={profile.email}
             onChange={(e) => handleChange("email", e.target.value)}
             placeholder="Email Address"
-            className="w-full bg-gray-800 text-white placeholder-gray-400"
+            className="w-full bg-gray-100 text-black"
           />
         </div>
 
@@ -146,7 +146,7 @@ export default function Profile() {
             type="date"
             value={profile.dob}
             onChange={(e) => handleChange("dob", e.target.value)}
-            className="w-full bg-gray-800 text-white placeholder-gray-400"
+            className="w-full bg-gray-100 text-black"
           />
         </div>
 
@@ -157,7 +157,7 @@ export default function Profile() {
             value={profile.occupation}
             onChange={(e) => handleChange("occupation", e.target.value)}
             placeholder="Occupation"
-            className="w-full bg-gray-800 text-white placeholder-gray-400"
+            className="w-full bg-gray-100 text-black"
           />
         </div>
 
@@ -167,13 +167,16 @@ export default function Profile() {
             id="employmentStatus"
             value={profile.employmentStatus}
             onChange={(e) => handleChange("employmentStatus", e.target.value)}
-            className="border p-2 rounded w-full bg-gray-800 text-white placeholder-gray-400"
+            className="border p-2 rounded w-full bg-gray-100 text-black"
           >
             <option value="employed">Employed</option>
             <option value="non-employed">Non-employed</option>
           </select>
         </div>
       </CardContent>
+      <div className="flex justify-end p-4">
+        <Button onClick={handleNextPage}>Next Page</Button>
+      </div>
     </Card>
   );
 }

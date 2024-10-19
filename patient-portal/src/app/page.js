@@ -96,6 +96,12 @@ export default function Component() {
             Resources
           </button>
           <button
+            className={`px-4 py-2 ${activeTab === 'appointment' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`}
+            onClick={() => setActiveTab('appointment')}
+          >
+            Appointment
+          </button>
+          <button
             className={`px-4 py-2 ${activeTab === 'feedback' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`}
             onClick={() => setActiveTab('feedback')}
           >
@@ -106,12 +112,6 @@ export default function Component() {
             onClick={() => setActiveTab('faq')}
           >
             FAQ
-          </button>
-          <button
-            className={`px-4 py-2 ${activeTab === 'appointment' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`}
-            onClick={() => setActiveTab('appointment')}
-          >
-            Appointment
           </button>
         </div>
 
@@ -125,11 +125,11 @@ export default function Component() {
 
           {activeTab === 'resources' && <Resources />}
 
+          {activeTab === 'appointment' && <AppointmentBooking />}
+
           {activeTab === 'feedback' && <Feedback />}
 
           {activeTab === 'faq' && <FAQ />}
-
-          {activeTab === 'appointment' && <AppointmentBooking />}
         </div>
       </div>
     </MantineProvider>
