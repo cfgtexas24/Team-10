@@ -23,15 +23,34 @@ export default function Profile() {
     gender: "male",
     occupation: "Software Engineer",
     userType: "admin",
+    employmentStatus: "employed", // Added employment status
   });
 
   const handleChange = (field, value) => {
     setProfile((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSaveChanges = () => {
-    // Handle the save action (you can extend this to send the data to an API later)
-    console.log(profile);
+  const handleNextPage = async () => {
+    try {
+      // Send the profile data to a C# backend API
+      const response = await fetch("/api/saveProfile", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(profile),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Profile saved:", result);
+        alert("Profile saved successfully! Moving to the next page...");
+      } else {
+        console.error("Failed to save profile");
+      }
+    } catch (error) {
+      console.error("Error occurred while saving profile:", error);
+    }
   };
 
   return (
@@ -143,9 +162,22 @@ export default function Profile() {
             className="w-full bg-gray-800 text-white placeholder-gray-400"
           />
         </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="employmentStatus">Employment Status</Label>
+          <select
+            id="employmentStatus"
+            value={profile.employmentStatus}
+            onChange={(e) => handleChange("employmentStatus", e.target.value)}
+            className="border p-2 rounded w-full bg-gray-800 text-white placeholder-gray-400"
+          >
+            <option value="employed">Employed</option>
+            <option value="non-employed">Non-employed</option>
+          </select>
+        </div>
       </CardContent>
       <CardFooter className="flex justify-end">
-        <Button onClick={handleSaveChanges}>Save Changes</Button>
+        <Button onClick={handleNextPage}>Next Page</Button>
       </CardFooter>
     </Card>
   );
