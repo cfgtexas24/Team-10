@@ -26,6 +26,10 @@ public class AccountService : IAccountService
     public AccountDto? AccountLogin(string username, string password)
     {
         var account = _context.Accounts.FirstOrDefault(a => a.Username == username);
+        if (account == null)
+        {
+            return null;
+        }
         var result = _passwordHasher.VerifyHashedPassword(new object(), account.Password, password);
         return result == PasswordVerificationResult.Success ? account.ConvertToDto() : null;
     }
