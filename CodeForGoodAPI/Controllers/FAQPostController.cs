@@ -42,7 +42,7 @@ public class FAQPostController
         return new JsonResult(new { success });
     }
 
-    [HttpPost("Delete")]
+    [HttpPost("Delete/{id}")]
     public JsonResult Delete(int id)
     {
         var success = _faqPostService.DeleteFAQPost(id);

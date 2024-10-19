@@ -1,6 +1,7 @@
 using CodeForGoodAPI;
 using CodeForGoodAPI.Models;
 using CodeForGoodAPI.Services.Accounts;
+using CodeForGoodAPI.Services.AppointmentHistories;
 using CodeForGoodAPI.Services.Patients;
 using CodeForGoodAPI.Services.Stories;
 using CodeForGoodAPI.Services.StoryReplies;
@@ -28,6 +29,7 @@ builder.Services.AddScoped<IStoryService, StoryService>();
 builder.Services.AddScoped<IStoryReplyService, StoryReplyService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IFAQPostService, FAQPostService>();
+builder.Services.AddScoped<IAppointmentHistoryService, AppointmentHistoryService>();
 
 builder.Services.AddCors(options =>
 {

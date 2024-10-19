@@ -11,6 +11,7 @@ public class BaseDbContext : DbContext
     public DbSet<StoryReply> StoryReplies { get; set; }
     public DbSet<Employee> Employees { get; set; }
     public DbSet<FAQPost> FAQPosts { get; set; }
+    public DbSet<AppointmentHistory> AppointmentHistories { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -18,6 +19,12 @@ public class BaseDbContext : DbContext
             .HasMany(e => e.Replies)
             .WithOne(e => e.Story)
             .HasForeignKey(e => e.StoryId)
+            .OnDelete(DeleteBehavior.Cascade);
+        
+        modelBuilder.Entity<Patient>()
+            .HasMany(p => p.AppointmentHistories)
+            .WithOne(p => p.Patient)
+            .HasForeignKey(p => p.PatientId)
             .OnDelete(DeleteBehavior.Cascade);
     }
 }
