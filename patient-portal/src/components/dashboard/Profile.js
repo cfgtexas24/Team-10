@@ -156,7 +156,7 @@ export default function Profile() {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="occupation">Designation</Label>
+          <Label htmlFor="occupation">Status Of Employment</Label>
           <Input
             id="occupation"
             value={profile.occupation}
