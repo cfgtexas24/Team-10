@@ -1,27 +1,20 @@
-"use client";
-import { useEffect, useState } from "react";
-import Profile from "../components/dashboard/Profile";
-import Story from "../components/dashboard/Story";
-import FAQ from "../components/dashboard/FAQ";
-import Resources from "../components/dashboard/Resources";
-import Feedback from "../components/dashboard/Feedback";
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from "../components/ui/Tabs";
-import Login from "../app/login";
-import { useRouter } from "next/navigation";
-// import AppointmentBooking from './AppointmentBooking';
-import { MantineProvider } from "@mantine/core";
-import Dashboard from "./dashboard/page";
+'use client';
+import { useState } from 'react';
+import Profile from '../components/dashboard/Profile';
+import Story from '../components/dashboard/Story';
+import FAQ from '../components/dashboard/FAQ';
+import Resources from '../components/dashboard/Resources';
+import Feedback from '../components/dashboard/Feedback';
+import AppointmentBooking from '../components/dashboard/AppointmentBooking'; // Import the correct component
+import Login from '../app/login';
+import { useRouter } from 'next/navigation';
+import { MantineProvider } from '@mantine/core';
 
 export default function Component() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
-  const [activeTab, setActiveTab] = useState("profile");
-  const [name, setName] = useState("John Doe");
-  const [email, setEmail] = useState("john.doe@example.com");
+  const [activeTab, setActiveTab] = useState('profile'); // Track which tab is active
+  const [name, setName] = useState('John Doe');
+  const [email, setEmail] = useState('john.doe@example.com');
   const [isAdmin, setIsAdmin] = useState(false); // Track if the user is an admin
   const router = useRouter();
 
@@ -82,59 +75,62 @@ export default function Component() {
           </div>
         )}
 
-        <Tabs defaultValue="profile" className="w-full">
-          <TabsList className="flex w-full justify-center space-x-8">
-            <TabsTrigger
-              value="profile"
-              onClick={() => setActiveTab("profile")}
-            >
-              Profile
-            </TabsTrigger>
-            <TabsTrigger value="story" onClick={() => setActiveTab("story")}>
-              Your Story
-            </TabsTrigger>
-            <TabsTrigger
-              value="resources"
-              onClick={() => setActiveTab("resources")}
-            >
-              Resources
-            </TabsTrigger>
-            <TabsTrigger
-              value="Feedback"
-              onClick={() => setActiveTab("Feedback")}
-            >
-              Feedback
-            </TabsTrigger>
-            <TabsTrigger value="faq" onClick={() => setActiveTab("faq")}>
-              FAQ
-            </TabsTrigger>
-          </TabsList>
+        {/* Tabs (Original Style with Manual onClick) */}
+        <div className="flex w-full justify-center space-x-4 mb-6 border-b-2 border-gray-200">
+          <button
+            className={`px-4 py-2 ${activeTab === 'profile' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`}
+            onClick={() => setActiveTab('profile')}
+          >
+            Profile
+          </button>
+          <button
+            className={`px-4 py-2 ${activeTab === 'story' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`}
+            onClick={() => setActiveTab('story')}
+          >
+            Your Story
+          </button>
+          <button
+            className={`px-4 py-2 ${activeTab === 'resources' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`}
+            onClick={() => setActiveTab('resources')}
+          >
+            Resources
+          </button>
+          <button
+            className={`px-4 py-2 ${activeTab === 'feedback' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`}
+            onClick={() => setActiveTab('feedback')}
+          >
+            Feedback
+          </button>
+          <button
+            className={`px-4 py-2 ${activeTab === 'faq' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`}
+            onClick={() => setActiveTab('faq')}
+          >
+            FAQ
+          </button>
+          <button
+            className={`px-4 py-2 ${activeTab === 'appointment' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`}
+            onClick={() => setActiveTab('appointment')}
+          >
+            Appointment
+          </button>
+        </div>
 
-          <TabsContent value="profile" activeTab={activeTab}>
-            <Profile
-              name={name}
-              email={email}
-              setName={setName}
-              setEmail={setEmail}
-            />
-          </TabsContent>
+        {/* Render Content based on Active Tab */}
+        <div className="tab-content">
+          {activeTab === 'profile' && (
+            <Profile name={name} email={email} setName={setName} setEmail={setEmail} />
+          )}
 
-          <TabsContent value="story" activeTab={activeTab}>
-            <Story />
-          </TabsContent>
+          {activeTab === 'story' && <Story />}
 
-          <TabsContent value="resources" activeTab={activeTab}>
-            <Resources />
-          </TabsContent>
+          {activeTab === 'resources' && <Resources />}
 
-          <TabsContent value="Feedback" activeTab={activeTab}>
-            <Feedback />
-          </TabsContent>
+          {activeTab === 'feedback' && <Feedback />}
 
-          <TabsContent value="faq" activeTab={activeTab}>
-            <FAQ />
-          </TabsContent>
-        </Tabs>
+          {activeTab === 'faq' && <FAQ />}
+
+          {activeTab === 'appointment' && <AppointmentBooking />}
+        </div>
       </div>
     </MantineProvider>
   );
