@@ -75,40 +75,64 @@ export default function Component() {
           </div>
         )}
 
-        {/* Tabs (Original Style with Manual onClick) */}
+        {/* Tabs with hover effect */}
         <div className="flex w-full justify-center space-x-4 mb-6 border-b-2 border-gray-200">
           <button
-            className={`px-4 py-2 ${activeTab === 'profile' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`}
+            className={`px-4 py-2 ${
+              activeTab === 'profile'
+                ? 'border-b-2 border-blue-500 text-blue-600'
+                : 'text-gray-500 hover:text-blue-500'
+            }`}
             onClick={() => setActiveTab('profile')}
           >
             Profile
           </button>
           <button
-            className={`px-4 py-2 ${activeTab === 'story' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`}
+            className={`px-4 py-2 ${
+              activeTab === 'story'
+                ? 'border-b-2 border-blue-500 text-blue-600'
+                : 'text-gray-500 hover:text-blue-500'
+            }`}
             onClick={() => setActiveTab('story')}
           >
             Your Story
           </button>
           <button
-            className={`px-4 py-2 ${activeTab === 'resources' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`}
+            className={`px-4 py-2 ${
+              activeTab === 'resources'
+                ? 'border-b-2 border-blue-500 text-blue-600'
+                : 'text-gray-500 hover:text-blue-500'
+            }`}
             onClick={() => setActiveTab('resources')}
           >
             Resources
           </button>
           <button
-            className={`px-4 py-2 ${activeTab === 'appointment' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`}
+            className={`px-4 py-2 ${
+              activeTab === 'appointment'
+                ? 'border-b-2 border-blue-500 text-blue-600'
+                : 'text-gray-500 hover:text-blue-500'
+            }`}
             onClick={() => setActiveTab('appointment')}
           >
             Appointment
           </button>
           <button
-            className={`px-4 py-2 ${activeTab === 'feedback' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`}
+            className={`px-4 py-2 ${
+              activeTab === 'feedback'
+                ? 'border-b-2 border-blue-500 text-blue-600'
+                : 'text-gray-500 hover:text-blue-500'
+            }`}
             onClick={() => setActiveTab('feedback')}
           >
             Feedback
           </button>
           <button
-            className={`px-4 py-2 ${activeTab === 'faq' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`}
+            className={`px-4 py-2 ${
+              activeTab === 'faq'
+                ? 'border-b-2 border-blue-500 text-blue-600'
+                : 'text-gray-500 hover:text-blue-500'
+            }`}
             onClick={() => setActiveTab('faq')}
           >
             FAQ
@@ -118,7 +142,12 @@ export default function Component() {
         {/* Render Content based on Active Tab */}
         <div className="tab-content">
           {activeTab === 'profile' && (
-            <Profile name={name} email={email} setName={setName} setEmail={setEmail} />
+            <Profile
+              name={name}
+              email={email}
+              setName={setName}
+              setEmail={setEmail}
+            />
           )}
 
           {activeTab === 'story' && <Story />}
