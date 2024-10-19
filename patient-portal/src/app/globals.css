@@ -23,23 +23,26 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Importing Calligraphy Font (Great Vibes) */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
 #1 {
   border: 3px solid white;
 }
-
-
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 
+
+
   .btn-primary {
     @apply bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700 transition ease-in-out duration-300 px-5 py-2;
   }
 
   .card {
-    @apply bg-white dark:bg-gray-800 p-10 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out text-xl; ;
+    @apply bg-white dark:bg-gray-800 p-10 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out text-xl;
     /* Added more padding and rounded-xl for smoother corners */
   }
 
@@ -80,11 +83,11 @@ body {
   .btn-primary {
     background-color: #3A696E;
   }
-  
+
   .btn-primary:hover {
     background-color: #6ea7ad; /* You can choose a slightly different shade for hover */
   }
-  
+
   .btn-primary:focus {
     background-color: #6ea7ad; /* Another slightly different shade for focus */
   }
@@ -92,4 +95,11 @@ body {
   .text-blue-600 {
     color: #6C5846;
   }
+
+  /* Calligraphy Font for Abide AI */
+  .font-great-vibes {
+    font-family: 'Great Vibes', cursive;
+  }
+
+  
 }

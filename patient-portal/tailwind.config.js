@@ -11,6 +11,9 @@ module.exports = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        'great-vibes': ['Great Vibes', 'cursive'], // Adding the calligraphy font
+      },
     },
   },
   plugins: [],
