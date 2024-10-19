@@ -1,5 +1,6 @@
 using CodeForGoodAPI;
 using CodeForGoodAPI.Models;
+using CodeForGoodAPI.Services.Accounts;
 using CodeForGoodAPI.Services.Patients;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +18,7 @@ string connectionString = builder.Configuration.GetConnectionString("DefaultConn
 #region Dependency Injection
 builder.Services.AddDbContext<BaseDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddScoped<IPatientService, PatientService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 #endregion
 
 var app = builder.Build();
