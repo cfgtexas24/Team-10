@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Card, CardHeader, CardContent } from "../ui/Card";
+import { Button } from "@/components/ui/Button";
 import {
   Accordion,
   AccordionItem,
@@ -154,9 +155,12 @@ export default function FAQ() {
             placeholder="Type your question here..."
             className="border p-2 w-full mb-2"
           />
-          <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-            Submit Question
-          </button>
+          <Button
+            type="submit"
+            className="w-full py-3 bg-[#A26B61] text-white font-bold rounded-lg shadow-md hover:bg-[#6C5846] transition-all duration-300"
+          >
+            Submit Feedback
+          </Button>
         </form>
 
         {/* Accordion to display FAQs */}

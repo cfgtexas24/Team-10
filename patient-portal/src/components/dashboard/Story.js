@@ -104,7 +104,7 @@ export default function SpotlightGrid() {
                     onChange={(e) => setNewComment(e.target.value)}
                   />
                   <button
-                    className="mt-2 p-2 bg-blue-600 text-white rounded hover:bg-blue-500 transition duration-300"
+                    className="mt-2 p-2 bg-[#A26B61] text-white rounded hover:bg-[#eb9b8c] transition duration-300"
                     onClick={() => handleAddComment(index)}
                   >
                     Add Comment

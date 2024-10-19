@@ -1,10 +1,10 @@
-'use client'
+'use client';
 
-import { useState } from "react"
-import { Button } from "@/components/ui/Button"
-import { Card } from "@/components/ui/Card"
-import { Textarea } from "@/components/ui/Textarea"
-import { useUser } from "@/context/UserContext"
+import { useState } from "react";
+import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
+import { Textarea } from "@/components/ui/Textarea";
+import { useUser } from "@/context/UserContext";
 
 export default function FeedbackForm() {
   const [feedback, setFeedback] = useState("");
@@ -31,46 +31,53 @@ export default function FeedbackForm() {
     } else {
       alert("Uh oh, something went wrong!");
     }
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await postFeedbackData();
-  }
+  };
 
   return (
-    <Card className="w-full max-w-md mx-auto p-6">
-      <h1 className="text-2xl font-bold flex justify-center items-center mb-6">Feedback Form</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="feedback" className="block text-sm font-medium">Feedback</label>
-          <Textarea
-            id="feedback"
-            value={feedback}
-            onChange={(e) => setFeedback(e.target.value)}
-            placeholder="Please enter your feedback"
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="rating" className="block text-sm font-medium">Rating</label>
-          <select
-            id="rating"
-            value={rating}
-            onChange={(e) => setRating(e.target.value)}
-            className="w-full p-2 border rounded"
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#A26B61] to-[#6C5846] mb-20">
+      <div className="p-10 bg-white shadow-md rounded-lg max-w-3xl w-full mx-auto transition transform hover:-translate-y-2 hover:shadow-2xl hover:scale-105">
+        <h2 className="text-3xl font-semibold mb-8 text-center">Feedback Form</h2>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label htmlFor="feedback" className="block text-sm font-medium text-gray-700">Feedback</label>
+            <Textarea
+              id="feedback"
+              value={feedback}
+              onChange={(e) => setFeedback(e.target.value)}
+              placeholder="Please enter your feedback"
+              className="w-full p-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#6C5846] focus:border-[#6C5846]"
+              required
+              rows={6}
+            />
+          </div>
+          <div>
+            <label htmlFor="rating" className="block text-sm font-medium text-gray-700">Rating</label>
+            <select
+              id="rating"
+              value={rating}
+              onChange={(e) => setRating(e.target.value)}
+              className="w-full p-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#6C5846] focus:border-[#6C5846]"
+            >
+              {[1, 2, 3, 4, 5].map((num) => (
+                <option key={num} value={num.toString()}>
+                  {num} Star{num !== 1 ? 's' : ''}
+                </option>
+              ))}
+            </select>
+          </div>
+          <Button
+            type="submit"
+            className="w-full py-3 bg-[#A26B61] text-white font-bold rounded-lg shadow-md hover:bg-[#6C5846] transition-all duration-300"
           >
-            {[1, 2, 3, 4, 5].map((num) => (
-              <option key={num} value={num.toString()}>
-                {num} Star{num !== 1 ? 's' : ''}
-              </option>
-            ))}
-          </select>
-        </div>
-        <Button type="submit" className="w-full">
-          Submit Feedback
-        </Button>
-      </form>
-    </Card>
-  )
+            Submit Feedback
+          </Button>
+        </form>
+      </div>
+    </div>
+  );
 }
