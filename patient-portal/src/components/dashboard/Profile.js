@@ -28,8 +28,30 @@ export default function Profile() {
     setProfile((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSaveChanges = () => {
+  const handleSaveChanges = async () => {
     // Handle the save action (you can extend this to send the data to an API later)
+    const url = "http://ec2-3-83-143-244.compute-1.amazonaws.com:5000/"
+    const request = await fetch(url, {
+      method: "POST",
+      body: {
+        firstName: profile.firstName,
+        lastName: profile.lastName,
+        emailAddress: profile.email,
+        dateOfBirth: profile.dob,
+        gender: profile.gender,
+        occupation: profile.occupation
+      }
+    });
+
+    const response = await request.json();
+
+    if (response.success) {
+      alert("Data successfully posted!");
+    } else {
+      alert("Something failed! Check the network tab.");
+    }
+    
+
     console.log(profile);
   };
 
