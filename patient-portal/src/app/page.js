@@ -29,7 +29,7 @@ export default function Component() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ username: email, password: password }), // Send the email and password in the request body
+          body: JSON.stringify({ username: email, password: password}), // Send the email and password in the request body
         }
       );
 
@@ -42,6 +42,7 @@ export default function Component() {
       // Check if the authentication is successful
       if (data.success) {
         setUserId(data.accountId);
+        setIsAdmin(data.patientId === null);
         setIsLoggedIn(true); // Update login status
         // Optionally, save the token or user information
         localStorage.setItem("accountId", data.accountId); // Save token in localStorage (if applicable)
@@ -67,16 +68,7 @@ export default function Component() {
           Patient Dashboard
         </h1>
 
-        {isAdmin && (
-          <div className="absolute top-4 right-4">
-            <button
-              className="btn-primary"
-              onClick={() => router.push("/dashboard")}
-            >
-              Go to Dashboard
-            </button>
-          </div>
-        )}
+        {isAdmin && router.push("/dashboard")}
 
         {/* Tabs with hover effect */}
         <div className="flex w-full justify-center space-x-4 mb-6 border-b-2 border-gray-200">
@@ -98,7 +90,7 @@ export default function Component() {
             }`}
             onClick={() => setActiveTab('story')}
           >
-            Your Story
+            Testimony
           </button>
           <button
             className={`px-4 py-2 ${

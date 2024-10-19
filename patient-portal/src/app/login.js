@@ -30,13 +30,13 @@ const Login = ({ onLogin }) => {
 
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="email" className="block text-[#6C5846] mb-2">
-              Your email
+            <label htmlFor="username" className="block text-[#6C5846] mb-2">
+              Your username
             </label>
             <input
               type="text"
-              id="email"
-              placeholder="name@company.com"
+              id="username"
+              placeholder="user"
               className="w-full p-3 rounded-lg border border-[#6C5846] focus:border-[#3A696E] focus:ring focus:ring-[#3A696E] focus:ring-opacity-50 transition-all duration-300 outline-none"
               required
               value={email}

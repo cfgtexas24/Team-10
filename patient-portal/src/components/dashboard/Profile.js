@@ -10,8 +10,11 @@ import {
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
 import { Avatar, AvatarImage } from "@/components/ui/Avatar";
+import { Button } from "@/components/ui/Button";
+import { useUser } from "@/context/UserContext";
 
 export default function Profile() {
+  const { userId } = useUser();
   const [profile, setProfile] = useState({
     firstName: "John",
     lastName: "Doe",
@@ -19,15 +22,49 @@ export default function Profile() {
     dob: "1990-01-01",
     gender: "male",
     occupation: "Software Engineer",
-    userType: "admin",
     employmentStatus: "employed",
+    race: "", // New field
+    ethnicity: "", // New field
+    insurance: "", // New field
   });
 
   const handleChange = (field, value) => {
     setProfile((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = () => {
+  const postProfileData = async () => {
+    const url = `http://ec2-3-83-143-244.compute-1.amazonaws.com:5000/Patient/Create`;
+    const request = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        firstName: profile.firstName,
+        lastName: profile.lastName,
+        emailAddress: profile.email,
+        dateOfBirth: profile.dob,
+        gender: profile.gender,
+        occupation: profile.occupation,
+        ethnicity: profile.ethnicity,
+        race: profile.race,
+        isInsured: profile.insurance === "yes" ? true : false,
+        accountId: userId
+      })
+    });
+
+    const response = await request.json();
+    if (response.success) {
+      alert("Profile data successsfully submitted");
+    } else {
+      alert("Profile data upload failed!");
+    }
+  }
+
+  const handleSubmit = async () => {
+    // Here, you would typically save the profile information
+    // For now, we'll just log the profile to the console
+    await postProfileData();
     console.log("Profile submitted:", profile);
 
     // Display alert pop-up
@@ -59,22 +96,6 @@ export default function Profile() {
             {profile.lastName[0]}
           </p>
         </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="userType" className="text-white">
-            User Type
-          </Label>
-          <select
-            id="userType"
-            value={profile.userType}
-            onChange={(e) => handleChange("userType", e.target.value)}
-            className="border p-2 rounded w-full bg-[#d39388] text-[#313131] focus:ring-2 focus:ring-[#6C5846] focus:border-[#6C5846] transition duration-300 ease-in-out"
-          >
-            <option value="admin">Admin</option>
-            <option value="patient">Patient</option>
-          </select>
-        </div>
-
         <div className="space-y-2">
           <Label htmlFor="gender" className="text-white">
             Gender
@@ -169,6 +190,53 @@ export default function Profile() {
           >
             <option value="employed">Employed</option>
             <option value="non-employed">Non-employed</option>
+          </select>
+        </div>
+
+        {/* New Fields: Race, Ethnicity, and Insurance */}
+        <div className="space-y-2">
+          <Label htmlFor="race">Race</Label>
+          <select
+            id="race"
+            value={profile.race}
+            onChange={(e) => handleChange("race", e.target.value)}
+            className="border p-2 rounded w-full bg-gray-100 text-black"
+          >
+            <option value="">Select Race</option>
+            <option value="white">White</option>
+            <option value="black">Black or African American</option>
+            <option value="asian">Asian</option>
+=            <option value="native_american">Native American</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="ethnicity">Ethnicity</Label>
+          <select
+            id="ethnicity"
+            value={profile.ethnicity}
+            onChange={(e) => handleChange("ethnicity", e.target.value)}
+            className="border p-2 rounded w-full bg-gray-100 text-black"
+          >
+            <option value="">Select Ethnicity</option>
+            <option value="hispanic">Hispanic or Latino</option>
+            <option value="not_hispanic">Not Hispanic or Latino</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="insurance">Insurance</Label>
+          <select
+            id="insurance"
+            value={profile.insurance}
+            onChange={(e) => handleChange("insurance", e.target.value)}
+            className="border p-2 rounded w-full bg-gray-100 text-black"
+          >
+            <option value="">Select Insurance Status</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
           </select>
         </div>
       </CardContent>
