@@ -58,4 +58,4 @@ export default function Component() {
       </Tabs>
     </div>
   );
-}
+};
