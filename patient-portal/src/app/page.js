@@ -3,234 +3,168 @@
 import { useState } from "react";
 import './form.css';
 
-const FormPage = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [contact, setContact] = useState("");
-  const [gender, setGender] = useState("male");
-  const [subjects, setSubjects] = useState({
-      english: true,
-      maths: false,
-      physics: false,
-  });
-  const [resume, setResume] = useState(null);
-  const [url, setUrl] = useState("");
-  const [selectedOption, setSelectedOption] = useState("");
-  const [about, setAbout] = useState("");
+const UpdatedFormPage = () => {
+    const midwifeNames = ["Midwife A", "Midwife B", "Midwife C", "Midwife D"];
+    const locations = ["Irving", "Richardson", "Dallas", "Plano"];
 
-  const handleSubmit = (e) => {
-      e.preventDefault();
-      console.log(
-          firstName,
-          lastName,
-          email,
-          contact,
-          gender,
-          selectedOption,
-          subjects,
-          resume,
-          url,
-          about
-      );
-      // Add form submission logic here
-  };
+    const [midwife, setMidwife] = useState("");
+    const [location, setLocation] = useState("");
+    const [relationship, setRelationship] = useState("");
+    const [visitationDate, setVisitationDate] = useState("");
+    const [satisfaction, setSatisfaction] = useState({
+        doctorKnowledge: "",
+        doctorKindness: "",
+        nursePatience: "",
+        nurseKnowledge: "",
+        waitingTime: "",
+        hygiene: "",
+    });
+    const [improvement, setImprovement] = useState("");
 
-  const handleSubjectChange = (sub) => {
-      setSubjects((prev) => ({
-          ...prev,
-          [sub]: !prev[sub],
-      }));
-  };
+    const handleSatisfactionChange = (aspect, value) => {
+        const scoreMapping = {
+            "Very satisfied": 5,
+            "Satisfied": 4,
+            "Neutral": 3,
+            "Unsatisfied": 2,
+            "Very unsatisfied": 1,
+        };
+        setSatisfaction(prev => ({ ...prev, [aspect]: scoreMapping[value] }));
+    };
 
-  const handleReset = () => {
-      setFirstName("");
-      setLastName("");
-      setEmail("");
-      setContact("");
-      setGender("male");
-      setSubjects({
-          english: true,
-          maths: false,
-          physics: false,
-      });
-      setResume(null);
-      setUrl("");
-      setSelectedOption("");
-      setAbout("");
-  };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log({ midwife, location, relationship, visitationDate, satisfaction, improvement });
+        // Add your form submission logic here, such as sending the data to a database
+    };
 
-  return (
-    <div className="App">
-      <h1>Form in React</h1>
-      <fieldset>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="firstname">First Name*</label>
-          <input
-            type="text"
-            name="firstname"
-            id="firstname"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            placeholder="Enter First Name"
-            required
-          />
+    return (
+        <div className="max-w-2xl mx-auto p-6 bg-white">
+            <h1 className="text-2xl font-bold mb-4 text-black">Patient Feedback Form</h1>
+            <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                    <div>
+                        <label htmlFor="midwife" className="block text-sm font-medium text-black">Midwife</label>
+                        <select
+                            id="midwife"
+                            value={midwife}
+                            onChange={(e) => setMidwife(e.target.value)}
+                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            required
+                        >
+                            <option value="">Select Midwife</option>
+                            {midwifeNames.map((name) => (
+                                <option key={name} value={name}>
+                                    {name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div>
+                        <label htmlFor="location" className="block text-sm font-medium text-black">Location</label>
+                        <select
+                            id="location"
+                            value={location}
+                            onChange={(e) => setLocation(e.target.value)}
+                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            required
+                        >
+                            <option value="">Select Location</option>
+                            {locations.map((loc) => (
+                                <option key={loc} value={loc}>
+                                    {loc}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
 
-          <label htmlFor="lastname">Last Name*</label>
-          <input
-            type="text"
-            name="lastname"
-            id="lastname"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            placeholder="Enter Last Name"
-            required
-          />
+                <div>
+                    <label htmlFor="relationship" className="block text-sm font-medium text-black">Patient-Midwife Relationship</label>
+                    <select
+                        id="relationship"
+                        value={relationship}
+                        onChange={(e) => setRelationship(e.target.value)}
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    >
+                        <option value="">Please Select</option>
+                        <option value="Pregnancy care">Pregnancy care</option>
+                        <option value="Labor and birth">Labor and birth</option>
+                        <option value="Postpartum care">Postpartum care</option>
+                    </select>
+                </div>
 
-          <label htmlFor="email">Email*</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter Email"
-            required
-          />
+                <div>
+                    <label htmlFor="visitationDate" className="block text-sm font-medium text-black">Visitation Date</label>
+                    <input
+                        type="date"
+                        id="visitationDate"
+                        value={visitationDate}
+                        onChange={(e) => setVisitationDate(e.target.value)}
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    />
+                </div>
 
-          <label htmlFor="contact">Contact*</label>
-          <input
-            type="tel"
-            name="contact"
-            id="contact"
-            value={contact}
-            onChange={(e) => setContact(e.target.value)}
-            placeholder="Enter Contact Number"
-            required
-          />
+                <div>
+                    <h2 className="text-lg font-semibold mb-2 text-black">Overall satisfaction</h2>
+                    <table className="w-full">
+                        <thead>
+                            <tr className="text-black">
+                                <th className="px-4 py-2 text-left"></th>
+                                <th className="px-4 py-2 text-center">Very satisfied</th>
+                                <th className="px-4 py-2 text-center">Satisfied</th>
+                                <th className="px-4 py-2 text-center">Neutral</th>
+                                <th className="px-4 py-2 text-center">Unsatisfied</th>
+                                <th className="px-4 py-2 text-center">Very unsatisfied</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {Object.entries(satisfaction).map(([key, value]) => (
+                                <tr key={key} className="border-b">
+                                    <td className="px-4 py-2 text-black">
+                                        {key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
+                                    </td>
+                                    {['Very satisfied', 'Satisfied', 'Neutral', 'Unsatisfied', 'Very unsatisfied'].map((option) => (
+                                        <td key={option} className="px-4 py-2 text-center">
+                                            <input
+                                                type="radio"
+                                                name={key}
+                                                value={option}
+                                                checked={value === option}
+                                                onChange={() => handleSatisfactionChange(key, option)}
+                                                className="form-radio h-4 w-4 text-blue-600"
+                                            />
+                                        </td>
+                                    ))}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
 
-          <label htmlFor="gender">Gender*</label>
-          <input
-            type="radio"
-            name="gender"
-            value="male"
-            id="male"
-            checked={gender === "male"}
-            onChange={(e) => setGender(e.target.value)}
-          />
-          Male
-          <input
-            type="radio"
-            name="gender"
-            value="female"
-            id="female"
-            checked={gender === "female"}
-            onChange={(e) => setGender(e.target.value)}
-          />
-          Female
-          <input
-            type="radio"
-            name="gender"
-            value="other"
-            id="other"
-            checked={gender === "other"}
-            onChange={(e) => setGender(e.target.value)}
-          />
-          Other
+                <div>
+                    <label htmlFor="improvement" className="block text-sm font-medium text-black">How can we improve our service?</label>
+                    <textarea
+                        id="improvement"
+                        value={improvement}
+                        onChange={(e) => setImprovement(e.target.value)}
+                        rows={4}
+                        className="mt-1 block w-full rounded-md text-black shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-black"
+                    ></textarea>
+                </div>
 
-          <label>Your best Subject</label>
-          <input
-            type="checkbox"
-            name="subject"
-            id="english"
-            checked={subjects.english}
-            onChange={() => handleSubjectChange("english")}
-          />
-          English
-          <input
-            type="checkbox"
-            name="subject"
-            id="maths"
-            checked={subjects.maths}
-            onChange={() => handleSubjectChange("maths")}
-          />
-          Maths
-          <input
-            type="checkbox"
-            name="subject"
-            id="physics"
-            checked={subjects.physics}
-            onChange={() => handleSubjectChange("physics")}
-          />
-          Physics
-
-          <label htmlFor="resume">Upload Resume*</label>
-          <input
-            type="file"
-            name="resume"
-            id="resume"
-            onChange={(e) => setResume(e.target.files[0])}
-            required
-          />
-
-          <label htmlFor="url">Portfolio URL*</label>
-          <input
-            type="url"
-            name="url"
-            id="url"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            placeholder="Enter your portfolio URL"
-            required
-          />
-
-          <label>Select Your Level</label>
-          <select
-            name="level"
-            id="level"
-            value={selectedOption}
-            onChange={(e) => setSelectedOption(e.target.value)}
-            required
-          >
-            <option value="" disabled>
-              Select your level
-            </option>
-            <optgroup label="Beginners">
-              <option value="1">HTML</option>
-              <option value="2">CSS</option>
-              <option value="3">JavaScript</option>
-            </optgroup>
-            <optgroup label="Advanced">
-              <option value="4">React</option>
-              <option value="5">Node</option>
-              <option value="6">Express</option>
-              <option value="7">MongoDB</option>
-            </optgroup>
-          </select>
-
-          <label htmlFor="about">About You*</label>
-          <textarea
-            name="about"
-            id="about"
-            cols="30"
-            rows="5"
-            value={about}
-            onChange={(e) => setAbout(e.target.value)}
-            placeholder="Tell us about yourself"
-            required
-          ></textarea>
-
-          <button type="reset" onClick={handleReset}>
-            Reset
-          </button>
-
-          <button type="submit">
-            Submit
-          </button>
-        </form>
-      </fieldset>
-    </div>
-  );
+                <div>
+                    <button
+                        type="submit"
+                        className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                    >
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    );
 };
 
-export default FormPage;
+export default UpdatedFormPage;
+it 
