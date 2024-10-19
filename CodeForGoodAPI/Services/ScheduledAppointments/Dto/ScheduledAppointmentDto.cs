@@ -1,16 +1,16 @@
-using CodeForGoodAPI.Services.ScheduledAppointments.Dto;
+using CodeForGoodAPI.Models;
 
-namespace CodeForGoodAPI.Models;
+namespace CodeForGoodAPI.Services.ScheduledAppointments.Dto;
 
-public class ScheduledAppointment
+public class ScheduledAppointmentDto
 {
     public int Id { get; set; }
     public DateTime StartTime { get; set; }
     public string Reason { get; set; }
 
-    public ScheduledAppointmentDto ConvertToDto()
+    public ScheduledAppointment ConvertToEntity()
     {
-        return new ScheduledAppointmentDto
+        return new ScheduledAppointment
         {
             Id = Id,
             StartTime = StartTime,
