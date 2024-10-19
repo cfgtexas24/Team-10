@@ -9,4 +9,5 @@ public interface IAccountService
     public List<AccountDto> GetAllAccounts();
     public bool CreateAccount(AccountDto accountDto);
     public bool DeleteAccountById(int id);
+    public bool DeleteAccountByUsername(string username);
 }

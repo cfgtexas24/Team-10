@@ -26,7 +26,7 @@ public class AccountController
         }
         else
         {
-            return new JsonResult(new { success = true, message = "" });
+            return new JsonResult(new { success = true, accountType = userLogin.AccountType });
         }
     }
 
@@ -34,6 +34,13 @@ public class AccountController
     public JsonResult CreateAccount([FromBody] AccountDto accountDto)
     {
         var success = _accountService.CreateAccount(accountDto);
+        return new JsonResult(new { success });
+    }
+
+    [HttpPost("DeleteAccount")]
+    public JsonResult DeleteAccount(string username)
+    {
+        var success = _accountService.DeleteAccountByUsername(username);
         return new JsonResult(new { success });
     }
 }
