@@ -1,22 +1,59 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent } from '../ui/Card';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '../ui/Accordion';
 
 export default function FAQ() {
-  const [faqs, setFaqs] = useState([
-    { question: 'How do I schedule an appointment?', answer: 'Call our office or use the online system.' },
-    { question: 'What are the working hours?', answer: 'We are open from 9 AM to 5 PM, Monday to Friday.' },
-  ]);
+  const fetchFAQData = async () => {
+    const url = "http://ec2-3-83-143-244.compute-1.amazonaws.com:5000/FAQPost/GetAll";
+    const request = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    const data = await request.json();
+    setFaqs(data);
+  }
+
+  const postFAQData = async () => {
+    const url = "http://ec2-3-83-143-244.compute-1.amazonaws.com:5000/FAQPost/Add";
+    const request = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        question: newQuestion,
+        answer: null,
+      }),
+    });
+
+    const data = await request.json();
+
+    if (data.success) {
+      alert("Success!");
+    } else {
+      alert("Failed :c");
+    }
+  }
+
+  useEffect(() => {
+    fetchFAQData();
+  }, [])
+  const [faqs, setFaqs] = useState([]);
 
   // State to handle the new question submission
   const [newQuestion, setNewQuestion] = useState('');
 
   // Function to handle adding a new question
-  const handleAddQuestion = (e) => {
+  const handleAddQuestion = async (e) => {
     e.preventDefault(); // Prevent form submission default behavior
     if (newQuestion.trim()) {
       // Add the new question to the faqs array
-      setFaqs([...faqs, { question: newQuestion, answer: '' }]);
+      await postFAQData();
+      await fetchFAQData();
+      // setFaqs([...faqs, { question: newQuestion, answer: '' }]);
       setNewQuestion(''); // Reset the input field
     }
   };

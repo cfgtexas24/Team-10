@@ -71,6 +71,19 @@ public class AccountService : IAccountService
         return true;
     }
 
+    public bool DeleteAccountByUsername(string username)
+    {
+        var account = _context.Accounts.FirstOrDefault(a => a.Username == username);
+        if (account == null)
+        {
+            return false;
+        }
+        
+        _context.Accounts.Remove(account);
+        _context.SaveChanges();
+        return true;
+    }
+
     private string HashPassword(string password)
     {
         return _passwordHasher.HashPassword(new object(), password);
