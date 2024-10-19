@@ -25,7 +25,7 @@ export default function Component() {
   const [isAdmin, setIsAdmin] = useState(false); // Track if the user is an admin
   const router = useRouter();
 
-  const handleLogin = async (email, password) => {
+  const handleLogin = async (email, password, isAdminStatus) => {
     try {
       const response = await fetch(
         "http://ec2-3-83-143-244.compute-1.amazonaws.com:5000/Account/Login",

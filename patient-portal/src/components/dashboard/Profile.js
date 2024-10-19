@@ -174,9 +174,6 @@ export default function Profile() {
           </select>
         </div>
       </CardContent>
-      <CardFooter className="flex justify-end">
-        <Button onClick={handleNextPage}>Next Page</Button>
-      </CardFooter>
     </Card>
   );
 }
