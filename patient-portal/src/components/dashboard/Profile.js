@@ -22,6 +22,7 @@ export default function Profile() {
     dob: "1990-01-01",
     gender: "male",
     occupation: "Software Engineer",
+    userType: "admin",
   });
 
   const handleChange = (field, value) => {
@@ -34,7 +35,7 @@ export default function Profile() {
   };
 
   return (
-    <Card className="max-w-lg mx-auto mt-10 shadow-lg rounded-lg">
+    <Card className="max-w-4xl mx-auto mt-10 shadow-lg rounded-lg">
       <CardHeader>
         <CardTitle className="text-2xl font-bold text-center">
           User Profile
@@ -43,8 +44,8 @@ export default function Profile() {
           Manage your patient information here.
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="flex justify-center mb-4">
+      <CardContent className="grid grid-cols-2 gap-4">
+        <div className="col-span-2 flex justify-center mb-4">
           <Avatar className="w-24 h-24">
             <AvatarImage
               src="/placeholder.svg"
@@ -56,6 +57,37 @@ export default function Profile() {
             </AvatarFallback>
           </Avatar>
         </div>
+
+        {/* Left Column */}
+        <div className="space-y-2">
+          <Label htmlFor="userType">User Type</Label>
+          <select
+            id="userType"
+            value={profile.userType}
+            onChange={(e) => handleChange("userType", e.target.value)}
+            className="border p-2 rounded w-full bg-gray-800 text-white placeholder-gray-400"
+          >
+            <option value="">Select user type</option>
+            <option value="admin">Admin</option>
+            <option value="patient">Patient</option>
+          </select>
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="gender">Gender</Label>
+          <select
+            id="gender"
+            value={profile.gender}
+            onChange={(e) => handleChange("gender", e.target.value)}
+            className="border p-2 rounded w-full bg-gray-800 text-white placeholder-gray-400"
+          >
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        {/* Right Column */}
         <div className="space-y-2">
           <Label htmlFor="firstName">First Name</Label>
           <Input
@@ -63,8 +95,10 @@ export default function Profile() {
             value={profile.firstName}
             onChange={(e) => handleChange("firstName", e.target.value)}
             placeholder="First Name"
+            className="w-full bg-gray-800 text-white placeholder-gray-400"
           />
         </div>
+
         <div className="space-y-2">
           <Label htmlFor="lastName">Last Name</Label>
           <Input
@@ -72,8 +106,10 @@ export default function Profile() {
             value={profile.lastName}
             onChange={(e) => handleChange("lastName", e.target.value)}
             placeholder="Last Name"
+            className="w-full bg-gray-800 text-white placeholder-gray-400"
           />
         </div>
+
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
           <Input
@@ -82,8 +118,10 @@ export default function Profile() {
             value={profile.email}
             onChange={(e) => handleChange("email", e.target.value)}
             placeholder="Email Address"
+            className="w-full bg-gray-800 text-white placeholder-gray-400"
           />
         </div>
+
         <div className="space-y-2">
           <Label htmlFor="dob">Date of Birth</Label>
           <Input
@@ -91,28 +129,18 @@ export default function Profile() {
             type="date"
             value={profile.dob}
             onChange={(e) => handleChange("dob", e.target.value)}
+            className="w-full bg-gray-800 text-white placeholder-gray-400"
           />
         </div>
+
         <div className="space-y-2">
-          <Label htmlFor="gender">Gender</Label>
-          <select
-            id="gender"
-            value={profile.gender}
-            onChange={(e) => handleChange("gender", e.target.value)}
-            className="border p-2 rounded"
-          >
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="occupation">Occupation</Label>
+          <Label htmlFor="occupation">Designation</Label>
           <Input
             id="occupation"
             value={profile.occupation}
             onChange={(e) => handleChange("occupation", e.target.value)}
             placeholder="Occupation"
+            className="w-full bg-gray-800 text-white placeholder-gray-400"
           />
         </div>
       </CardContent>
