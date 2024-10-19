@@ -73,18 +73,21 @@ export default function Component() {
         )}
 
         <Tabs defaultValue="profile" className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="flex w-full justify-center space-x-8">
             <TabsTrigger value="profile" onClick={() => setActiveTab('profile')}>
               Profile
             </TabsTrigger>
             <TabsTrigger value="story" onClick={() => setActiveTab('story')}>
               Your Story
             </TabsTrigger>
-            <TabsTrigger value="faq" onClick={() => setActiveTab('faq')}>
-              FAQ
-            </TabsTrigger>
             <TabsTrigger value="resources" onClick={() => setActiveTab('resources')}>
               Resources
+            </TabsTrigger>
+            <TabsTrigger value="Feedback" onClick={() => setActiveTab('Feedback')}>
+              Feedback
+            </TabsTrigger>
+            <TabsTrigger value="faq" onClick={() => setActiveTab('faq')}>
+              FAQ
             </TabsTrigger>
           </TabsList>
 
@@ -96,13 +99,19 @@ export default function Component() {
             <Story />
           </TabsContent>
 
+          <TabsContent value="resources" activeTab={activeTab}>
+            <Resources />
+          </TabsContent>
+
+          <TabsContent value="Feedback" activeTab={activeTab}>
+            <Feedback />
+          </TabsContent>
+
           <TabsContent value="faq" activeTab={activeTab}>
             <FAQ />
           </TabsContent>
 
-          <TabsContent value="resources" activeTab={activeTab}>
-            <Resources />
-          </TabsContent>
+          
         </Tabs>
       </div>
     </MantineProvider>
