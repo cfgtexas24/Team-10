@@ -20,7 +20,12 @@ public class PatientController
     [HttpGet("GetById/{id}")]
     public JsonResult GetById(int id)
     {
-        return new JsonResult(_patientService.GetPatientById(id));
+        var patient = _patientService.GetPatientById(id);
+        if (patient == null)
+        {
+            return new JsonResult(new { success = false, message = "Patient not found." });
+        }
+        return new JsonResult(patient);
     }
 
     [HttpGet("GetAll")]
@@ -32,14 +37,14 @@ public class PatientController
     [HttpPost("Create")]
     public JsonResult Create(PatientDto patient)
     {
-        _patientService.CreatePatient(patient);
-        return new JsonResult(new {success = true});
+        var success = _patientService.CreatePatient(patient);
+        return new JsonResult(new {success});
     }
 
     [HttpPost("Delete/{id}")]
     public JsonResult Delete(int id)
     {
-        _patientService.DeletePatientById(id);
-        return new JsonResult(new {success = true});
+        var success = _patientService.DeletePatientById(id);
+        return new JsonResult(new {success});
     }
 }

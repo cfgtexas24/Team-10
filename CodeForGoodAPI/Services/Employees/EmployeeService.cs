@@ -12,9 +12,14 @@ public class EmployeeService : IEmployeeService
         _context = context;
     }
 
-    public EmployeeDto GetEmployeeById(int id)
+    public EmployeeDto? GetEmployeeById(int id)
     {
         var employee = _context.Employees.FirstOrDefault(x => x.Id == id);
+        if (employee == null)
+        {
+            return null;
+        }
+        
         return new EmployeeDto
         {
             Id = employee.Id,
@@ -30,16 +35,22 @@ public class EmployeeService : IEmployeeService
         return employee.Select(x => x.ConvertToDto()).ToList();
     }   
 
-        public void CreateEmployee(EmployeeDto employeedto)
+    public bool CreateEmployee(EmployeeDto employeedto)
     {
         _context.Employees.Add(employeedto.ConvertToEntity());
         _context.SaveChanges();
+        return true;
     }
 
-    public void DeleteEmployee(int id)
+    public bool DeleteEmployee(int id)
     {
         var employee = _context.Employees.FirstOrDefault(x => x.Id == id);
+        if (employee == null)
+        {
+            return false;
+        }
         _context.Employees.Remove(employee);
         _context.SaveChanges();
+        return true;
     }
 }

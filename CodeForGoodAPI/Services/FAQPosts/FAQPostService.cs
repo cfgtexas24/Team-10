@@ -13,10 +13,10 @@ public class FAQPostService : IFAQPostService
     }
 
 
-    public FAQPostDto GetFAQPost(int id)
+    public FAQPostDto? GetFAQPost(int id)
     {
         var post = _context.FAQPosts.FirstOrDefault(post => post.Id == id);
-        return post.ConvertToDto();
+        return post?.ConvertToDto();
     }
 
     public List<FAQPostDto> GetFAQPosts()
@@ -25,17 +25,23 @@ public class FAQPostService : IFAQPostService
         return posts.Select(post => post.ConvertToDto()).ToList();
     }
 
-    public void CreateFAQPost(FAQPostDto dto)
+    public bool CreateFAQPost(FAQPostDto dto)
     {
         var post = dto.ConvertToEntity();
         _context.FAQPosts.Add(post);
         _context.SaveChanges();
+        return true;
     }
 
-    public void DeleteFAQPost(int id)
+    public bool DeleteFAQPost(int id)
     {
         var post = _context.FAQPosts.FirstOrDefault(post => post.Id == id);
+        if (post == null)
+        {
+            return false;
+        }
         _context.FAQPosts.Remove(post);
         _context.SaveChanges();
+        return true;
     }
 }

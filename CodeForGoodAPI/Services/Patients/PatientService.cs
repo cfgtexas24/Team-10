@@ -11,9 +11,14 @@ public class PatientService : IPatientService
     {
         _context = context;
     }
-    public PatientDto GetPatientById(int id)
+    public PatientDto? GetPatientById(int id)
     {
         var patient = _context.Patients.FirstOrDefault(x => x.Id == id);
+        if (patient == null)
+        {
+            return null;
+        }
+        
         return new PatientDto
         {
             Id = patient.Id,
@@ -32,16 +37,22 @@ public class PatientService : IPatientService
         return patients.Select(x => x.ConvertToDto()).ToList();
     }
 
-    public void CreatePatient(PatientDto patientDto)
+    public bool CreatePatient(PatientDto patientDto)
     {
         _context.Patients.Add(patientDto.ConvertToEntity());
         _context.SaveChanges();
+        return true;
     }
 
-    public void DeletePatientById(int id)
+    public bool DeletePatientById(int id)
     {
         var patient = _context.Patients.FirstOrDefault(x => x.Id == id);
+        if (patient == null)
+        {
+            return false;
+        }
         _context.Patients.Remove(patient);
         _context.SaveChanges();
+        return true;
     }
 }
