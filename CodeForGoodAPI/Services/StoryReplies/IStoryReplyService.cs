@@ -4,7 +4,7 @@ namespace CodeForGoodAPI.Services.StoryReplies;
 
 public interface IStoryReplyService
 {
-    public void AddStoryReply(StoryReplyDto dto);
-    public void DeleteStoryReply(int storyReplyId);
+    public bool AddStoryReply(StoryReplyDto dto);
+    public bool DeleteStoryReply(int storyReplyId);
     public List<StoryReplyDto> GetStoryReplies(int storyId);
 }

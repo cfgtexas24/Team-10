@@ -12,18 +12,24 @@ public class StoryReplyService : IStoryReplyService
         _context = context;
     }
     
-    public void AddStoryReply(StoryReplyDto dto)
+    public bool AddStoryReply(StoryReplyDto dto)
     {
         var storyReply = dto.ConvertToEntity();
         _context.StoryReplies.Add(storyReply);
         _context.SaveChanges();
+        return true;
     }
 
-    public void DeleteStoryReply(int storyReplyId)
+    public bool DeleteStoryReply(int storyReplyId)
     {
         var storyReply = _context.StoryReplies.FirstOrDefault(s => s.Id == storyReplyId);
+        if (storyReply == null)
+        {
+            return false;
+        }
         _context.StoryReplies.Remove(storyReply);
         _context.SaveChanges();
+        return true;
     }
 
     public List<StoryReplyDto> GetStoryReplies(int storyId)

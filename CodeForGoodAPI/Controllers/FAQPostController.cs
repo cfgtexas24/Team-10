@@ -1,5 +1,7 @@
+using System.Net;
 using CodeForGoodAPI.Services.FAQPosts;
 using CodeForGoodAPI.Services.FAQPosts.Dto;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeForGoodAPI.Controllers;
@@ -19,6 +21,10 @@ public class FAQPostController
     public JsonResult GetById(int id)
     {
         var faqPost = _faqPostService.GetFAQPost(id);
+        if (faqPost == null)
+        {
+            return new JsonResult(new { success = false, message = "Post not found." });
+        }
         return new JsonResult(faqPost);
     }
 
@@ -30,16 +36,16 @@ public class FAQPostController
     }
 
     [HttpPost("Add")]
-    public JsonResult Add(FAQPostDto faqPost)
+    public JsonResult Add([FromBody] FAQPostDto faqPost)
     {
-        _faqPostService.CreateFAQPost(faqPost);
-        return new JsonResult(new { success = true });
+        var success = _faqPostService.CreateFAQPost(faqPost);
+        return new JsonResult(new { success });
     }
 
     [HttpPost("Delete")]
     public JsonResult Delete(int id)
     {
-        _faqPostService.DeleteFAQPost(id);
-        return new JsonResult(new { success = true });
+        var success = _faqPostService.DeleteFAQPost(id);
+        return new JsonResult(new { success });
     }
 }
