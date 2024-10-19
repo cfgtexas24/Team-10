@@ -10,8 +10,10 @@ import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
 import { Avatar, AvatarImage } from "@/components/ui/Avatar";
 import { Button } from "@/components/ui/Button";
+import { useUser } from "@/context/UserContext";
 
 export default function Profile() {
+  const { userId } = useUser();
   const [profile, setProfile] = useState({
     firstName: "John",
     lastName: "Doe",
@@ -19,7 +21,6 @@ export default function Profile() {
     dob: "1990-01-01",
     gender: "male",
     occupation: "Software Engineer",
-    userType: "admin",
     employmentStatus: "employed",
     race: "", // New field
     ethnicity: "", // New field
@@ -30,9 +31,39 @@ export default function Profile() {
     setProfile((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = () => {
+  const postProfileData = async () => {
+    const url = `http://ec2-3-83-143-244.compute-1.amazonaws.com:5000/Patient/Create`;
+    const request = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        firstName: profile.firstName,
+        lastName: profile.lastName,
+        emailAddress: profile.email,
+        dateOfBirth: profile.dob,
+        gender: profile.gender,
+        occupation: profile.occupation,
+        ethnicity: profile.ethnicity,
+        race: profile.race,
+        isInsured: profile.insurance === "yes" ? true : false,
+        accountId: userId
+      })
+    });
+
+    const response = await request.json();
+    if (response.success) {
+      alert("Profile data successsfully submitted");
+    } else {
+      alert("Profile data upload failed!");
+    }
+  }
+
+  const handleSubmit = async () => {
     // Here, you would typically save the profile information
     // For now, we'll just log the profile to the console
+    await postProfileData();
     console.log("Profile submitted:", profile);
   };
 
@@ -60,20 +91,6 @@ export default function Profile() {
           </p>{" "}
           {/* Centered initials */}
         </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="userType">User Type</Label>
-          <select
-            id="userType"
-            value={profile.userType}
-            onChange={(e) => handleChange("userType", e.target.value)}
-            className="border p-2 rounded w-full bg-gray-100 text-black"
-          >
-            <option value="admin">Admin</option>
-            <option value="patient">Patient</option>
-          </select>
-        </div>
-
         <div className="space-y-2">
           <Label htmlFor="gender">Gender</Label>
           <select

@@ -42,6 +42,7 @@ export default function Component() {
       // Check if the authentication is successful
       if (data.success) {
         setUserId(data.accountId);
+        setIsAdmin(data.patientId === null);
         setIsLoggedIn(true); // Update login status
         // Optionally, save the token or user information
         localStorage.setItem("accountId", data.accountId); // Save token in localStorage (if applicable)
