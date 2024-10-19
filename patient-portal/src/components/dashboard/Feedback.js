@@ -4,14 +4,38 @@ import { useState } from "react"
 import { Button } from "@/components/ui/Button"
 import { Card } from "@/components/ui/Card"
 import { Textarea } from "@/components/ui/Textarea"
+import { useUser } from "@/context/UserContext"
 
 export default function FeedbackForm() {
-  const [feedback, setFeedback] = useState("")
-  const [rating, setRating] = useState("5")
+  const [feedback, setFeedback] = useState("");
+  const [rating, setRating] = useState("5");
+  const { userId } = useUser();
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log({ feedback, rating })
+  const postFeedbackData = async () => {
+    const url = `http://ec2-3-83-143-244.compute-1.amazonaws.com:5000/Feedback/CreateFeedback`;
+    const request = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        content: feedback,
+        rating: rating,
+        accountId: userId
+      })
+    });
+    const response = await request.json();
+
+    if (response.success) {
+      alert("Yay, feedback submitted!");
+    } else {
+      alert("Uh oh, something went wrong!");
+    }
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await postFeedbackData();
   }
 
   return (

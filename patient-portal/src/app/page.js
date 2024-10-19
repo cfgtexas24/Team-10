@@ -9,6 +9,7 @@ import AppointmentBooking from '../components/dashboard/AppointmentBooking'; // 
 import Login from '../app/login';
 import { useRouter } from 'next/navigation';
 import { MantineProvider } from '@mantine/core';
+import { useUser, UserProvider } from '@/context/UserContext';
 
 export default function Component() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
@@ -17,6 +18,7 @@ export default function Component() {
   const [email, setEmail] = useState('john.doe@example.com');
   const [isAdmin, setIsAdmin] = useState(false); // Track if the user is an admin
   const router = useRouter();
+  const { setUserId } = useUser();
 
   const handleLogin = async (email, password, isAdminStatus) => {
     try {
@@ -39,9 +41,10 @@ export default function Component() {
 
       // Check if the authentication is successful
       if (data.success) {
+        setUserId(data.accountId);
         setIsLoggedIn(true); // Update login status
         // Optionally, save the token or user information
-        localStorage.setItem("token", data.token); // Save token in localStorage (if applicable)
+        localStorage.setItem("accountId", data.accountId); // Save token in localStorage (if applicable)
       } else {
         alert(data.message); // Show error message
       }
