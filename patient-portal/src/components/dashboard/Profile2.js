@@ -1,5 +1,3 @@
-import { useState } from "react";
-import Profile2 from "@/components/dashboard/Profile2"; // Import Profile2 component
 import {
   Card,
   CardContent,
@@ -10,58 +8,23 @@ import {
 } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
-import { Button } from "@/components/ui/Button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
+import { Button } from "@/components/ui/Button";
 
-export default function Profile() {
-  const [profile, setProfile] = useState({
-    firstName: "John",
-    lastName: "Doe",
-    email: "john.doe@example.com",
-    dob: "1990-01-01",
-    gender: "male",
-    occupation: "Software Engineer",
-    userType: "admin",
-    employmentStatus: "employed",
-  });
-
-  const [currentPage, setCurrentPage] = useState(1); // Track the current page
-
-  const handleChange = (field, value) => {
-    setProfile((prev) => ({ ...prev, [field]: value }));
-  };
-
-  const handleNextPage = () => {
-    setCurrentPage((prev) => prev + 1); // Go to the next page
-  };
-
-  const handlePreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prev) => prev - 1); // Go to the previous page
-    }
-  };
-
-  // Render Profile2 when on the second page
-  if (currentPage === 2) {
-    return (
-      <Profile2
-        profile={profile}
-        handleChange={handleChange}
-        handleNextPage={handleNextPage}
-        handlePreviousPage={handlePreviousPage}
-      />
-    );
-  }
-
-  // Render Profile (first page) without the "Previous Page" button
+export default function Profile2({
+  profile,
+  handleChange,
+  handleNextPage,
+  handlePreviousPage,
+}) {
   return (
     <Card className="max-w-4xl mx-auto mt-10 shadow-lg rounded-lg">
       <CardHeader>
         <CardTitle className="text-2xl font-bold text-center">
-          User Profile
+          User Profile 2
         </CardTitle>
         <CardDescription className="text-center">
-          Manage your patient information here.
+          Manage the second user profile here.
         </CardDescription>
       </CardHeader>
       <CardContent className="grid grid-cols-2 gap-4">
@@ -76,33 +39,6 @@ export default function Profile() {
               {profile.lastName[0]}
             </AvatarFallback>
           </Avatar>
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="userType">User Type</Label>
-          <select
-            id="userType"
-            value={profile.userType}
-            onChange={(e) => handleChange("userType", e.target.value)}
-            className="border p-2 rounded w-full bg-gray-800 text-white placeholder-gray-400"
-          >
-            <option value="admin">Admin</option>
-            <option value="patient">Patient</option>
-          </select>
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="gender">Gender</Label>
-          <select
-            id="gender"
-            value={profile.gender}
-            onChange={(e) => handleChange("gender", e.target.value)}
-            className="border p-2 rounded w-full bg-gray-800 text-white placeholder-gray-400"
-          >
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-          </select>
         </div>
 
         <div className="space-y-2">
@@ -160,22 +96,11 @@ export default function Profile() {
             className="w-full bg-gray-800 text-white placeholder-gray-400"
           />
         </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="employmentStatus">Employment Status</Label>
-          <select
-            id="employmentStatus"
-            value={profile.employmentStatus}
-            onChange={(e) => handleChange("employmentStatus", e.target.value)}
-            className="border p-2 rounded w-full bg-gray-800 text-white placeholder-gray-400"
-          >
-            <option value="employed">Employed</option>
-            <option value="non-employed">Non-employed</option>
-          </select>
-        </div>
       </CardContent>
-      <CardFooter className="flex justify-end">
-        <Button onClick={handleNextPage}>Next Page</Button>
+      <CardFooter className="flex justify-between">
+        <Button onClick={handlePreviousPage}>Previous Page</Button>
+        <Button onClick={handleNextPage}>Next Page</Button>{" "}
+        {/* For future pages */}
       </CardFooter>
     </Card>
   );
