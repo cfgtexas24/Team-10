@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import './form.css';
+import "./form.css";
 
 const FormPage = () => {
   const [firstName, setFirstName] = useState("");
@@ -10,9 +10,9 @@ const FormPage = () => {
   const [contact, setContact] = useState("");
   const [gender, setGender] = useState("male");
   const [subjects, setSubjects] = useState({
-      english: true,
-      maths: false,
-      physics: false,
+    english: true,
+    maths: false,
+    physics: false,
   });
   const [resume, setResume] = useState(null);
   const [url, setUrl] = useState("");
@@ -20,44 +20,44 @@ const FormPage = () => {
   const [about, setAbout] = useState("");
 
   const handleSubmit = (e) => {
-      e.preventDefault();
-      console.log(
-          firstName,
-          lastName,
-          email,
-          contact,
-          gender,
-          selectedOption,
-          subjects,
-          resume,
-          url,
-          about
-      );
-      // Add form submission logic here
+    e.preventDefault();
+    console.log(
+      firstName,
+      lastName,
+      email,
+      contact,
+      gender,
+      selectedOption,
+      subjects,
+      resume,
+      url,
+      about
+    );
+    // Add form submission logic here
   };
 
   const handleSubjectChange = (sub) => {
-      setSubjects((prev) => ({
-          ...prev,
-          [sub]: !prev[sub],
-      }));
+    setSubjects((prev) => ({
+      ...prev,
+      [sub]: !prev[sub],
+    }));
   };
 
   const handleReset = () => {
-      setFirstName("");
-      setLastName("");
-      setEmail("");
-      setContact("");
-      setGender("male");
-      setSubjects({
-          english: true,
-          maths: false,
-          physics: false,
-      });
-      setResume(null);
-      setUrl("");
-      setSelectedOption("");
-      setAbout("");
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setContact("");
+    setGender("male");
+    setSubjects({
+      english: true,
+      maths: false,
+      physics: false,
+    });
+    setResume(null);
+    setUrl("");
+    setSelectedOption("");
+    setAbout("");
   };
 
   return (
@@ -75,7 +75,6 @@ const FormPage = () => {
             placeholder="Enter First Name"
             required
           />
-
           <label htmlFor="lastname">Last Name*</label>
           <input
             type="text"
@@ -86,7 +85,6 @@ const FormPage = () => {
             placeholder="Enter Last Name"
             required
           />
-
           <label htmlFor="email">Email*</label>
           <input
             type="email"
@@ -97,7 +95,6 @@ const FormPage = () => {
             placeholder="Enter Email"
             required
           />
-
           <label htmlFor="contact">Contact*</label>
           <input
             type="tel"
@@ -108,7 +105,6 @@ const FormPage = () => {
             placeholder="Enter Contact Number"
             required
           />
-
           <label htmlFor="gender">Gender*</label>
           <input
             type="radio"
@@ -137,7 +133,6 @@ const FormPage = () => {
             onChange={(e) => setGender(e.target.value)}
           />
           Other
-
           <label>Your best Subject</label>
           <input
             type="checkbox"
@@ -163,7 +158,6 @@ const FormPage = () => {
             onChange={() => handleSubjectChange("physics")}
           />
           Physics
-
           <label htmlFor="resume">Upload Resume*</label>
           <input
             type="file"
@@ -172,7 +166,6 @@ const FormPage = () => {
             onChange={(e) => setResume(e.target.files[0])}
             required
           />
-
           <label htmlFor="url">Portfolio URL*</label>
           <input
             type="url"
@@ -183,7 +176,6 @@ const FormPage = () => {
             placeholder="Enter your portfolio URL"
             required
           />
-
           <label>Select Your Level</label>
           <select
             name="level"
@@ -207,7 +199,6 @@ const FormPage = () => {
               <option value="7">MongoDB</option>
             </optgroup>
           </select>
-
           <label htmlFor="about">About You*</label>
           <textarea
             name="about"
@@ -219,14 +210,10 @@ const FormPage = () => {
             placeholder="Tell us about yourself"
             required
           ></textarea>
-
           <button type="reset" onClick={handleReset}>
             Reset
           </button>
-
-          <button type="submit">
-            Submit
-          </button>
+          <button type="submit">Submit</button>
         </form>
       </fieldset>
     </div>
