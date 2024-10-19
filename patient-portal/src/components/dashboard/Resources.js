@@ -1,14 +1,34 @@
 import React from 'react';
 import { Card, CardHeader, CardContent } from '../ui/Card';
 
-const ResourceCard = ({ title, description, imageUrl, learnMoreUrl }) => (
+// Function to randomly pick a URL from an array of articles
+const getRandomPrenatalArticle = () => {
+  const prenatalArticles = [
+    "https://www.mayoclinic.org/healthy-lifestyle/pregnancy-week-by-week/in-depth/prenatal-care/art-20044812",
+    "https://www.webmd.com/baby/guide/prenatal-care-what-to-expect",
+    "https://www.acog.org/womens-health/faqs/prenatal-development-how-your-baby-grows-during-pregnancy",
+    "https://www.cdc.gov/ncbddd/pregnancy_gateway/basics.html",
+    "https://www.healthline.com/health/pregnancy/prenatal-care",
+    "https://www.marchofdimes.org/find-support/topics/pregnancy/prenatal-care",
+    "https://www.nichd.nih.gov/health/topics/pregnancy/conditioninfo/prenatal-care"
+  ];
+  const randomIndex = Math.floor(Math.random() * prenatalArticles.length);
+  return prenatalArticles[randomIndex];
+};
+
+const ResourceCard = ({ title, description, imageUrl }) => (
   <Card className="mb-4">
     <CardContent className="flex items-start">
       <img src={imageUrl} alt={title} className="w-24 h-24 object-cover mr-4" />
       <div>
         <h3 className="text-lg font-semibold mb-2">{title}</h3>
         <p className="text-sm text-gray-600 mb-2">{description}</p>
-        <a href={learnMoreUrl} className="text-blue-600 hover:underline text-sm uppercase font-semibold">
+        <a 
+          href={getRandomPrenatalArticle()} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-blue-600 hover:underline text-sm uppercase font-semibold"
+        >
           Learn More
         </a>
       </div>
@@ -21,7 +41,7 @@ export default function Resources() {
     {
       title: "Verify PA Certification",
       description: "Need to verify PA certification and/or disciplinary actions issued by NCCPA? Access our easy-to-use PA Certification Verification tool.",
-      imageUrl: "/path/to/verify-image.jpg",
+      imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScldcKuZ_YmoTfCeY6VkCTosUD8kfdGE1pRA&s",
       learnMoreUrl: "#verify-pa-certification"
     },
     {
@@ -77,17 +97,31 @@ export default function Resources() {
       description: "View the policies and procedures for NCCPA certification, certification maintenance and more.",
       imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd7kPqyrUdEGNGPS0mLNBWZYPcaxpPfn3LgQ&s",
       learnMoreUrl: "#policies-and-procedures"
+    },
+    {
+      title: "Policies and Procedures",
+      description: "View the policies and procedures for NCCPA certification, certification maintenance and more.",
+      imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd7kPqyrUdEGNGPS0mLNBWZYPcaxpPfn3LgQ&s",
+      learnMoreUrl: "#policies-and-procedures"
+    },
+    {
+      title: "Policies and Procedures",
+      description: "View the policies and procedures for NCCPA certification, certification maintenance and more.",
+      imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd7kPqyrUdEGNGPS0mLNBWZYPcaxpPfn3LgQ&s",
+      learnMoreUrl: "#policies-and-procedures"
     }
   ];
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">Resources</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {resources.map((resource, index) => (
-          <ResourceCard key={index} {...resource} />
-        ))}
-      </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {resources.map((resource, index) => (
+        <ResourceCard
+          key={index}
+          title={resource.title}
+          description={resource.description}
+          imageUrl={resource.imageUrl}
+        />
+      ))}
     </div>
   );
 }
