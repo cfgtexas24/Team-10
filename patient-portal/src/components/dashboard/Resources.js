@@ -60,42 +60,42 @@ export default function Resources() {
     },
     {
       id: 1,
-      title: "Policies and Procedures",
+      title: "JJ Way Easy Access",
       description: "View the policies and procedures for NCCPA certification, certification maintenance and more.",
       imageUrl: "https://obgyn-media.coloradowomenshealth.com/Call_the_Midwife-Understanding_a_MidwifesRole.jpg",
       learnMoreUrl: "#policies-and-procedures"
     },
     {
       id: 1,
-      title: "Policies and Procedures",
+      title: "Supportive Pregnancy Care",
       description: "View the policies and procedures for NCCPA certification, certification maintenance and more.",
       imageUrl: "https://assets.healthpartners.com/is/image/healthpartners/brand-identity/photography/stock/lifestyle/family/getty726783477-2000x666.jpg?wid=992",
       learnMoreUrl: "#policies-and-procedures"
     },
     {
       id: 1,
-      title: "Policies and Procedures",
+      title: "Childbirth Education",
       description: "View the policies and procedures for NCCPA certification, certification maintenance and more.",
       imageUrl: "https://www.drlafollette.com/wp-content/uploads/2019/02/MODEL-13-300x300.png",
       learnMoreUrl: "#policies-and-procedures"
     },
     {
       id: 1,
-      title: "Policies and Procedures",
+      title: "Lactation Support",
       description: "View the policies and procedures for NCCPA certification, certification maintenance and more.",
       imageUrl: "https://www.shutterstock.com/shutterstock/videos/1070576338/thumb/9.jpg?ip=x480",
       learnMoreUrl: "#policies-and-procedures"
     },
     {
       id: 1,
-      title: "Policies and Procedures",
+      title: "Postpartum Doula Support",
       description: "View the policies and procedures for NCCPA certification, certification maintenance and more.",
       imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMxb1LyWPqHuYtucDaNdefZ22TbGn_iCZllDjoFq8NPd2Ybt79-T6DtjZhciZv-60ttPk&usqp=CAU",
       learnMoreUrl: "#policies-and-procedures"
     },
     {
       id: 1,
-      title: "Policies and Procedures",
+      title: "Mobile Clinic",
       description: "View the policies and procedures for NCCPA certification, certification maintenance and more.",
       imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTg7_XIj1bbiEKS-Z88mgh75wc7CHaog6ZJZg&s",
       learnMoreUrl: "#policies-and-procedures"
@@ -109,14 +109,14 @@ export default function Resources() {
     },
     {
       id: 1,
-      title: "Policies and Procedures",
+      title: "Connect with Woman",
       description: "View the policies and procedures for NCCPA certification, certification maintenance and more.",
       imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd7kPqyrUdEGNGPS0mLNBWZYPcaxpPfn3LgQ&s",
       learnMoreUrl: "#policies-and-procedures"
     },
     {
       id: 1,
-      title: "Policies and Procedures",
+      title: "Mentorship",
       description: "View the policies and procedures for NCCPA certification, certification maintenance and more.",
       imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd7kPqyrUdEGNGPS0mLNBWZYPcaxpPfn3LgQ&s",
       learnMoreUrl: "#policies-and-procedures"
