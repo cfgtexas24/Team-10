@@ -1,4 +1,5 @@
 using CodeForGoodAPI.Models;
+using CodeForGoodAPI.Services.Patients.Dto;
 
 namespace CodeForGoodAPI.Services.Accounts.Dto;
 
@@ -7,7 +8,7 @@ public class AccountDto
     public int Id { get; set; }
     public string Username { get; set; }
     public string Password { get; set; }
-    public string? AccountType { get; set; }
+    public PatientDto? Patient { get; set; }
 
     public Account ConvertToEntity()
     {
@@ -16,7 +17,7 @@ public class AccountDto
             Id = Id,
             Username = Username,
             Password = Password,
-            AccountType = AccountType,
+            Patient = Patient?.ConvertToEntity()
         };
     }
 }
