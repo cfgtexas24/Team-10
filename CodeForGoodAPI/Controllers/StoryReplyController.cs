@@ -23,16 +23,16 @@ public class StoryReplyController
     }
 
     [HttpPost("Create")]
-    public JsonResult CreateStoryReply(StoryReplyDto reply)
+    public JsonResult CreateStoryReply([FromBody] StoryReplyDto reply)
     {
-        _storyReplyService.AddStoryReply(reply);
-        return new JsonResult(new { success = true });
+        var success = _storyReplyService.AddStoryReply(reply);
+        return new JsonResult(new { success });
     }
 
     [HttpPost("Delete/{id}")]
     public JsonResult Delete(int id)
     {
-        _storyReplyService.DeleteStoryReply(id);
-        return new JsonResult(new { success = true });
+        var success = _storyReplyService.DeleteStoryReply(id);
+        return new JsonResult(new { success });
     }
 }

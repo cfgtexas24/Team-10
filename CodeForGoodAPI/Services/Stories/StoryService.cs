@@ -14,10 +14,10 @@ public class StoryService : IStoryService
     }
 
 
-    public StoryDto GetStoryById(int id)
+    public StoryDto? GetStoryById(int id)
     {
         var story = _context.Stories.Include(s => s.Replies).FirstOrDefault(s => s.Id == id);
-        return story.ConvertToDto();
+        return story?.ConvertToDto();
     }
 
     public List<StoryDto> GetAllStories()
@@ -26,10 +26,23 @@ public class StoryService : IStoryService
         return stories.Select(s => s.ConvertToDto()).ToList();
     }
 
-    public void Create(StoryDto dto)
+    public bool Create(StoryDto dto)
     {
         var story = dto.ConvertToEntity();
         _context.Stories.Add(story);
         _context.SaveChanges();
+        return true;
+    }
+
+    public bool Delete(int id)
+    {
+        var story = _context.Stories.FirstOrDefault(s => s.Id == id);
+        if (story == null)
+        {
+            return false;
+        }
+        _context.Stories.Remove(story);
+        _context.SaveChanges();
+        return true;
     }
 }

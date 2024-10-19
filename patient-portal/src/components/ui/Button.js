@@ -1,4 +1,4 @@
-export function Button({ children }) {
-    return <button className="btn btn-primary">{children}</button>;
+export function Button({ children, ...props }) {
+    return <button className="btn btn-primary" {...props}>{children}</button>;
   }
   

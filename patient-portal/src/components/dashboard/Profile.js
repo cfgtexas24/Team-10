@@ -30,27 +30,34 @@ export default function Profile() {
     setProfile((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleNextPage = async () => {
-    try {
-      // Send the profile data to a C# backend API
-      const response = await fetch("/api/saveProfile", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(profile),
-      });
+  const handleSaveChanges = async () => {
+    // Handle the save action (you can extend this to send the data to an API later)
+    const url =
+      "http://ec2-3-83-143-244.compute-1.amazonaws.com:5000/Patient/Create";
+    const request = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName: profile.firstName,
+        lastName: profile.lastName,
+        emailAddress: profile.email,
+        dateOfBirth: profile.dob,
+        gender: profile.gender,
+        occupation: profile.occupation,
+      }),
+    });
 
-      if (response.ok) {
-        const result = await response.json();
-        console.log("Profile saved:", result);
-        alert("Profile saved successfully! Moving to the next page...");
-      } else {
-        console.error("Failed to save profile");
-      }
-    } catch (error) {
-      console.error("Error occurred while saving profile:", error);
+    const response = await request.json();
+
+    if (response.success) {
+      alert("Data successfully posted!");
+    } else {
+      alert("Something failed! Check the network tab.");
     }
+
+    console.log(profile);
   };
 
   return (
