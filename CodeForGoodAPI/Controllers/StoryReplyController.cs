@@ -15,7 +15,7 @@ public class StoryReplyController
         _storyReplyService = service;
     }
 
-    [HttpGet("GetStoryReplies/{storyId")]
+    [HttpGet("GetStoryReplies/{storyId}")]
     public JsonResult GetStoryReplies(int storyId)
     {
         var replies =  _storyReplyService.GetStoryReplies(storyId);
