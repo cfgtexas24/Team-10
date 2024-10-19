@@ -29,7 +29,7 @@ export default function Component() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ username: email, password: password }), // Send the email and password in the request body
+          body: JSON.stringify({ username: email, password: password}), // Send the email and password in the request body
         }
       );
 
@@ -99,7 +99,7 @@ export default function Component() {
             }`}
             onClick={() => setActiveTab('story')}
           >
-            Your Story
+            Testimony
           </button>
           <button
             className={`px-4 py-2 ${
