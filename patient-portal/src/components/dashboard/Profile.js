@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Profile2 from "@/components/dashboard/Profile2"; // Import Profile2 component
 import {
   Card,
   CardContent,
@@ -24,35 +23,16 @@ export default function Profile() {
     employmentStatus: "employed",
   });
 
-  const [currentPage, setCurrentPage] = useState(1); // Track the current page
-
   const handleChange = (field, value) => {
     setProfile((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleNextPage = () => {
-    setCurrentPage((prev) => prev + 1); // Go to the next page
+  const handleSubmit = () => {
+    // Here, you would typically save the profile information
+    // For now, we'll just log the profile to the console
+    console.log("Profile submitted:", profile);
   };
 
-  const handlePreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prev) => prev - 1); // Go to the previous page
-    }
-  };
-
-  // Render Profile2 when on the second page
-  if (currentPage === 2) {
-    return (
-      <Profile2
-        profile={profile}
-        handleChange={handleChange}
-        handleNextPage={handleNextPage}
-        handlePreviousPage={handlePreviousPage}
-      />
-    );
-  }
-
-  // Render Profile (first page) without the "Previous Page" button
   return (
     <Card className="max-w-4xl mx-auto mt-10 shadow-lg rounded-lg">
       <CardHeader>
@@ -174,8 +154,10 @@ export default function Profile() {
           </select>
         </div>
       </CardContent>
+
+      {/* Submit Button */}
       <div className="flex justify-end p-4">
-        <Button onClick={handleNextPage}>Next Page</Button>
+        <Button onClick={handleSubmit}>Submit</Button>
       </div>
     </Card>
   );
