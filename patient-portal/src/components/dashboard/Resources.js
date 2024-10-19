@@ -4,7 +4,7 @@ import { Card, CardHeader, CardContent } from '../ui/Card';
 // Function to randomly pick a URL from an array of articles
 const getRandomPrenatalArticle = () => {
   const prenatalArticles = [
-    "https://www.mayoclinic.org/healthy-lifestyle/pregnancy-week-by-week/in-depth/prenatal-care/art-20044812",
+    "https://www.webmd.com/women/first-doctor-visit",
     "https://www.webmd.com/baby/guide/prenatal-care-what-to-expect",
     "https://www.acog.org/womens-health/faqs/prenatal-development-how-your-baby-grows-during-pregnancy",
     "https://www.cdc.gov/ncbddd/pregnancy_gateway/basics.html",
@@ -40,10 +40,10 @@ export default function Resources() {
   const resources = [
     {
       id: 1,
-      title: "Verify PA Certification",
-      description: "Need to verify PA certification and/or disciplinary actions issued by NCCPA? Access our easy-to-use PA Certification Verification tool.",
+      title: "Your First Prenatal Doctor's Visit",
+      description: "Regular appointments with your health care provider throughout your pregnancy are important to ensure the health of you and your baby. In addition to medical care, prenatal care includes education on pregnancy and childbirth, plus counseling and support.",
       imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScldcKuZ_YmoTfCeY6VkCTosUD8kfdGE1pRA&s",
-      learnMoreUrl: "#verify-pa-certification"
+      learnMoreUrl: "https://www.webmd.com/women/first-doctor-visit"
     },
     {
       title: "NCCPA Research",

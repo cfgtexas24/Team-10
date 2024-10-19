@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Profile2 from "@/components/dashboard/Profile2"; // Import Profile2 component
 import {
   Card,
   CardContent,
@@ -19,40 +18,24 @@ export default function Profile() {
     email: "john.doe@example.com",
     dob: "1990-01-01",
     gender: "male",
-    occupation: "Software Engineer",
+    occupation: "BusinessMan",
     userType: "admin",
     employmentStatus: "employed",
+    race: "", // New field
+    ethnicity: "", // New field
+    insurance: "", // New field
   });
-
-  const [currentPage, setCurrentPage] = useState(1); // Track the current page
 
   const handleChange = (field, value) => {
     setProfile((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleNextPage = () => {
-    setCurrentPage((prev) => prev + 1); // Go to the next page
+  const handleSubmit = () => {
+    // Here, you would typically save the profile information
+    // For now, we'll just log the profile to the console
+    console.log("Profile submitted:", profile);
   };
 
-  const handlePreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prev) => prev - 1); // Go to the previous page
-    }
-  };
-
-  // Render Profile2 when on the second page
-  if (currentPage === 2) {
-    return (
-      <Profile2
-        profile={profile}
-        handleChange={handleChange}
-        handleNextPage={handleNextPage}
-        handlePreviousPage={handlePreviousPage}
-      />
-    );
-  }
-
-  // Render Profile (first page) without the "Previous Page" button
   return (
     <Card className="max-w-4xl mx-auto mt-10 shadow-lg rounded-lg">
       <CardHeader>
@@ -173,9 +156,58 @@ export default function Profile() {
             <option value="non-employed">Non-employed</option>
           </select>
         </div>
+
+        {/* New Fields: Race, Ethnicity, and Insurance */}
+        <div className="space-y-2">
+          <Label htmlFor="race">Race</Label>
+          <select
+            id="race"
+            value={profile.race}
+            onChange={(e) => handleChange("race", e.target.value)}
+            className="border p-2 rounded w-full bg-gray-100 text-black"
+          >
+            <option value="">Select Race</option>
+            <option value="white">White</option>
+            <option value="black">Black or African American</option>
+            <option value="asian">Asian</option>
+=            <option value="native_american">Native American</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="ethnicity">Ethnicity</Label>
+          <select
+            id="ethnicity"
+            value={profile.ethnicity}
+            onChange={(e) => handleChange("ethnicity", e.target.value)}
+            className="border p-2 rounded w-full bg-gray-100 text-black"
+          >
+            <option value="">Select Ethnicity</option>
+            <option value="hispanic">Hispanic or Latino</option>
+            <option value="not_hispanic">Not Hispanic or Latino</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="insurance">Insurance</Label>
+          <select
+            id="insurance"
+            value={profile.insurance}
+            onChange={(e) => handleChange("insurance", e.target.value)}
+            className="border p-2 rounded w-full bg-gray-100 text-black"
+          >
+            <option value="">Select Insurance Status</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
       </CardContent>
+
+      {/* Submit Button */}
       <div className="flex justify-end p-4">
-        <Button onClick={handleNextPage}>Next Page</Button>
+        <Button onClick={handleSubmit}>Submit</Button>
       </div>
     </Card>
   );

@@ -5,7 +5,7 @@
 :root {
   --background: #f0f4f8;
   --foreground: #333;
-  --primary-color: #2c7a4e;
+  --primary-color: #1d8e4e;
   --secondary-color: #4a5568;
 }
 
@@ -19,6 +19,8 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
+
 
   .btn-primary {
     @apply bg-green-600 text-white rounded px-4 py-2 hover:bg-green-700 transition ease-in-out duration-300;
@@ -57,7 +59,7 @@ body {
   }
 
   .header-nav-item {
-    @apply text-white hover:text-green-200;
+    @apply text-white hover:text-blue-200;
   }
 
   .form-step {

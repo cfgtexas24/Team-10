@@ -11,6 +11,11 @@ public class PatientDto
     public DateTime DateOfBirth { get; set; }
     public string Gender { get; set; }
     public string Occupation { get; set; }
+    public string Ethnicity { get; set; }
+    public string Race { get; set; }
+    public bool IsInsured { get; set; }
+    
+    public int AccountId { get; set; }
 
     public Patient ConvertToEntity()
     {
@@ -22,7 +27,11 @@ public class PatientDto
             EmailAddress = EmailAddress,
             DateOfBirth = DateOfBirth,
             Gender = Gender,
-            Occupation = Occupation
+            Occupation = Occupation,
+            Ethnicity = Ethnicity,
+            Race = Race,
+            IsInsured = IsInsured,
+            AccountId = AccountId
         };
     }
 }
