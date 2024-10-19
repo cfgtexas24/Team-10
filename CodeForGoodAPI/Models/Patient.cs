@@ -12,7 +12,7 @@ public class Patient
     public string EmailAddress { get; set; }
     public DateTime DateOfBirth { get; set; }
     public string Gender { get; set; }
-    public string UserType { get; set; }
+    public string Occupation { get; set; }
     // To do: add public string Occupation { get; set; }
 
     public PatientDto ConvertToDto()
@@ -25,7 +25,7 @@ public class Patient
             EmailAddress = EmailAddress,
             DateOfBirth = DateOfBirth,
             Gender = Gender,
-            UserType = UserType
+            Occupation = Occupation
         };
     }
 }

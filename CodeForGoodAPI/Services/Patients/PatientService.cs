@@ -22,7 +22,7 @@ public class PatientService : IPatientService
             FirstName = patient.FirstName,
             LastName = patient.LastName,
             Gender = patient.Gender,
-            UserType = patient.UserType,
+            Occupation = patient.Occupation,
         };
     }
 

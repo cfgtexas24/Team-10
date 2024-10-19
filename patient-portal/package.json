@@ -12,10 +12,18 @@
     "@babel/core": "^7.25.8",
     "@babel/preset-env": "^7.25.8",
     "@babel/preset-react": "^7.25.7",
+    "@mantine/core": "^7.13.3",
     "babel": "^6.23.0",
+<<<<<<< HEAD
     "next": "^14.2.15",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
+=======
+    "next": "14.2.15",
+    "patient-portal": "file:",
+    "react": "^18",
+    "react-dom": "^18"
+>>>>>>> 99335af991583d47beab53f0fb87cb4244aea194
   },
   "devDependencies": {
     "@babel/core": "^7.25.8",
