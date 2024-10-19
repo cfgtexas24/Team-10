@@ -16,9 +16,9 @@ public class AccountController
     }
 
     [HttpPost("Login")]
-    public JsonResult Login(string username, string password)
+    public JsonResult Login([FromBody] AccountDto dto)
     {
-        var userLogin = _accountService.AccountLogin(username, password);
+        var userLogin = _accountService.AccountLogin(dto.Username, dto.Password);
 
         if (userLogin == null)
         {
