@@ -3,10 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
+  --background: #ffffff ;
   --foreground: #171717;
   --primary-color: #A26B61; /* You can customize this */
   --secondary-color: #3A696E;
+  --color: #313131;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -74,5 +75,21 @@ body {
   .accordion-content {
     @apply p-6 bg-gray-100 dark:bg-gray-700 rounded-lg mt-3;
     /* More padding and rounded-lg for consistency */
+  }
+
+  .btn-primary {
+    background-color: #3A696E;
+  }
+  
+  .btn-primary:hover {
+    background-color: #6ea7ad; /* You can choose a slightly different shade for hover */
+  }
+  
+  .btn-primary:focus {
+    background-color: #6ea7ad; /* Another slightly different shade for focus */
+  }
+
+  .text-blue-600 {
+    color: #6C5846;
   }
 }
