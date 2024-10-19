@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Login = () => {
+const Login = ({ onLogin }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent default form submission
+    onLogin(email, password); // Call the onLogin prop with email and password
+  };
+
   return (
     <section className="flex justify-center items-center min-h-screen">
       <div className="max-w-md w-full card">
@@ -8,17 +16,19 @@ const Login = () => {
           Sign in to your account
         </h1>
 
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
             <label htmlFor="email" className="label">
               Your email
             </label>
             <input
-              type="email"
+              type="text"
               id="email"
               placeholder="name@company.com"
               className="input"
               required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)} // Update email state
             />
           </div>
 
@@ -32,17 +42,9 @@ const Login = () => {
               placeholder="••••••••"
               className="input"
               required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)} // Update password state
             />
-          </div>
-
-          <div className="flex items-center justify-between">
-            <label className="flex items-center">
-              <input type="checkbox" className="mr-2" />
-              <span className="label">Remember me</span>
-            </label>
-            <a href="#" className="text-sm font-semibold text-blue-600 hover:underline">
-              Forgot password?
-            </a>
           </div>
 
           <button type="submit" className="btn-primary w-full">
