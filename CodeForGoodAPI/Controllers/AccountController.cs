@@ -26,14 +26,14 @@ public class AccountController
         }
         else
         {
-            return new JsonResult(new { success = true });
+            return new JsonResult(new { success = true, message = "" });
         }
     }
 
     [HttpPost("CreateAccount")]
     public JsonResult CreateAccount(AccountDto accountDto)
     {
-        _accountService.CreateAccount(accountDto);
-        return new JsonResult(new { success = true });
+        var success = _accountService.CreateAccount(accountDto);
+        return new JsonResult(new { success });
     }
 }

@@ -26,15 +26,24 @@ public class StoryController
     public JsonResult GetById(int id)
     {
         var story = _storyService.GetStoryById(id);
+        if (story == null)
+        {
+            return new JsonResult(new { success = false, message = "Story not found." });
+        }
         return new JsonResult(story);
     }
 
     [HttpPost("Create")]
     public JsonResult Create(StoryDto dto)
     {
-        _storyService.Create(dto);
-        return new JsonResult(new {success = true});
+        var success = _storyService.Create(dto);
+        return new JsonResult(new {success});
     }
-    
-    
+
+    [HttpPost("Delete")]
+    public JsonResult Delete(int id)
+    {
+        var success = _storyService.Delete(id);
+        return new JsonResult(new {success});
+    }
 }

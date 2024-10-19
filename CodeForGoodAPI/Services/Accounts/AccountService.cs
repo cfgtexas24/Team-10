@@ -17,10 +17,10 @@ public class AccountService : IAccountService
         _context = context;
     }
     
-    public AccountDto GetAccountById(int id)
+    public AccountDto? GetAccountById(int id)
     {
         var account = _context.Accounts.FirstOrDefault(a => a.Id == id);
-        return account.ConvertToDto();
+        return account?.ConvertToDto();
     }
 
     public AccountDto? AccountLogin(string username, string password)
@@ -36,21 +36,35 @@ public class AccountService : IAccountService
         return accounts.Select(x => x.ConvertToDto()).ToList();
     }
 
-    public void CreateAccount(AccountDto accountDto)
+    public bool CreateAccount(AccountDto accountDto)
     {
         var account = accountDto.ConvertToEntity();
+        
+        var exists = _context.Accounts.Any(a => a.Username == account.Username);
+        if (exists)
+        {
+            return false;
+        }
         // 128-bit salt
         account.Password = HashPassword(account.Password);
         
         _context.Accounts.Add(account);
         _context.SaveChanges();
+
+        return true;
     }
 
-    public void DeleteAccountById(int id)
+    public bool DeleteAccountById(int id)
     {
         var account = _context.Accounts.FirstOrDefault(a => a.Id == id);
+        if (account == null)
+        {
+            return false;
+        }
+        
         _context.Accounts.Remove(account);
         _context.SaveChanges();
+        return true;
     }
 
     private string HashPassword(string password)
