@@ -60,6 +60,11 @@ export default function Profile() {
     console.log(profile);
   };
 
+  const handleNextPage = () => {
+    // Logic for handling the next page action
+    console.log("Next page clicked");
+  };
+
   return (
     <Card className="max-w-4xl mx-auto mt-10 shadow-lg rounded-lg">
       <CardHeader>
@@ -74,7 +79,7 @@ export default function Profile() {
         <div className="col-span-2 flex justify-center mb-4">
           <Avatar className="w-24 h-24">
             <AvatarImage
-              src="/placeholder.svg"
+              src="https://www.studioepic.com/blog/blog_images/1_Black_Girl_Casual_Profile_Picture.jpg"
               alt={`${profile.firstName} ${profile.lastName}`}
             />
             <AvatarFallback>
